@@ -1,15 +1,17 @@
 package com.uniparthenope.innervision.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "VENDITORE")
+@Getter
+@Setter
 public class Venditore {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_VENDITORE", unique = true, nullable = false)
     private Long idVenditore;
 }

@@ -5,13 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "CLIENTE")
+@Table(name = "DIZ_CATEGORIA")
 @Getter
 @Setter
-public class Cliente {
+public class DizCategoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ID_CLIENTE", unique = true, nullable = false)
-    private Long idCliente;
+    @Column(name = "ID_CATEGORIA", nullable = false)
+    private Long idCategoria;
 }
