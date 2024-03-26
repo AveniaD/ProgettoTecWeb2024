@@ -14,4 +14,10 @@ public class DizColore {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_COLORE", nullable = false)
     private Long idColore;
+
+    @Column(name = "DESC_COLORE", nullable = false)
+    private String descColore;
+
+    @Column(name = "ATTIVO", nullable = false, length = 1)
+    private String attivo;
 }

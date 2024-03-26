@@ -2290,7 +2290,7 @@
 											"top": 198,
 											"width": 112,
 											"height": 13,
-											"text": "Visualizza carrello"
+											"text": "Gestisci carrello"
 										},
 										{
 											"_type": "LabelView",
@@ -2323,7 +2323,7 @@
 									"font": "Arial;13;0",
 									"left": 281.5,
 									"top": 191,
-									"width": 122.48681640625,
+									"width": 122,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGOdkEEGCBkPnQ="
@@ -5083,7 +5083,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGOdjmBsR6icxQ="
 							},
-							"name": "Visualizza carrello"
+							"name": "Gestisci carrello"
 						},
 						{
 							"_type": "UMLUseCase",

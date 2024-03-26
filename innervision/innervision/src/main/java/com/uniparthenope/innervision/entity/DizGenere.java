@@ -15,5 +15,9 @@ public class DizGenere {
     @Column(name = "ID_GENERE", nullable = false)
     private Long idGenere;
 
+    @Column(name = "DESC_GENERE", nullable = false)
+    private String descGenere;
 
+    @Column(name = "ATTIVO", nullable = false, length = 1)
+    private String attivo;
 }
