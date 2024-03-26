@@ -1,4 +1,4 @@
-package com.uniparthenope.innervision.entity;
+package com.uniparthenope.innervision.entity.diz;
 
 import jakarta.persistence.*;
 import lombok.Getter;
