@@ -3,7 +3,9 @@ package com.uniparthenope.innervision.entity;
 import com.uniparthenope.innervision.entity.diz.DizStatoCarrello;
 import com.uniparthenope.innervision.entity.diz.DizTipologiaUtente;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
 @Table(name = "CARRELLO")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Carrello {
 
     @Id
@@ -19,7 +23,6 @@ public class Carrello {
     @Column(name = "ID_CARRELLO", nullable = false)
     private Long idCarrello;
 
-    //Da verificare il mappedBy
     @OneToMany(cascade = CascadeType.ALL)
     private List<Articolo> articoli;
 

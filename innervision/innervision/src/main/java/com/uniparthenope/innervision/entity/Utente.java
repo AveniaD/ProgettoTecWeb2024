@@ -2,13 +2,17 @@ package com.uniparthenope.innervision.entity;
 
 import com.uniparthenope.innervision.entity.diz.DizTipologiaUtente;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "Utente")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Utente {
 
     @Id

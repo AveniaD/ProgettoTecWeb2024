@@ -2,14 +2,19 @@ package com.uniparthenope.innervision.entity;
 
 import com.uniparthenope.innervision.entity.diz.*;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "ARTICOLO")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Articolo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_ARTICOLO", nullable = false)
@@ -29,14 +34,14 @@ public class Articolo {
     private DizMarchio marchio;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_DIZ_MARCHIO")
+    @JoinColumn(name = "ID_DIZ_GENERE")
     private DizGenere genere;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_DIZ_MARCHIO")
+    @JoinColumn(name = "ID_DIZ_COLORE")
     private DizColore colore;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_DIZ_MARCHIO")
+    @JoinColumn(name = "ID_DIZ_CATEGORIA")
     private DizCategoria categoria;
 }
