@@ -15,7 +15,7 @@ public class DizTipologiaUtente {
     @Column(name = "ID_TIPOLOGIA_UTENTE", nullable = false)
     private Long idTipologiaUtente;
 
-    @Column(name = "DESC_MARCHIO", nullable = false)
+    @Column(name = "DESC_TIPOLOGIA_UTENTE", nullable = false)
     private String descTipologiaUtente;
 
     @Column(name = "ATTIVO", nullable = false, length = 1)
