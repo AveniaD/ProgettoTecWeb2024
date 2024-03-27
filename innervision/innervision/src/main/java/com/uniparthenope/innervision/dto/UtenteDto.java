@@ -1,4 +1,4 @@
 package com.uniparthenope.innervision.dto;
 
-public class VenditoreDto {
+public class UtenteDto {
 }
