@@ -15,7 +15,7 @@ public class WebClientConfig {
     public String fetchDataFromRemoteAPI() {
 
         return webClient.get()
-                .uri("http://localhost:8080/api/endpoint")
+                .uri("http://localhost:8080/api/innervision")
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
