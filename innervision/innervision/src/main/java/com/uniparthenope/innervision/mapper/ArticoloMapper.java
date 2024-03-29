@@ -1,12 +1,11 @@
 package com.uniparthenope.innervision.mapper;
 
-import com.uniparthenope.innervision.dto.UtenteDto;
+import com.uniparthenope.innervision.dto.ArticoloDto;
 import com.uniparthenope.innervision.entity.Articolo;
-import com.uniparthenope.innervision.entity.Utente;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ArticoloDto {
+public interface ArticoloMapper {
 
     Articolo dtoToEntity(ArticoloDto articoloDto);
 
