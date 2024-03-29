@@ -32,7 +32,9 @@ public class ArticoloDto {
 
     private DizGenere genere;
 
-    private DizColore colore;
+    private DizColore coloreMontatura;
+
+    private DizColore coloreLente;
 
     private DizCategoria categoria;
 }

@@ -38,8 +38,12 @@ public class Articolo {
     private DizGenere genere;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_DIZ_COLORE")
-    private DizColore colore;
+    @JoinColumn(name = "ID_DIZ_COLORE_MONTATURA")
+    private DizColore coloreMontatura;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_DIZ_COLORE_LENTE")
+    private DizColore coloreLente;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_DIZ_CATEGORIA")
