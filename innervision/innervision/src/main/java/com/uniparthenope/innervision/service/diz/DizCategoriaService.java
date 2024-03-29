@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DizCategoriaService {
 
-    List<DizCategoria> findAll();
+    List<DizCategoria> findAllByAttivo();
 }
