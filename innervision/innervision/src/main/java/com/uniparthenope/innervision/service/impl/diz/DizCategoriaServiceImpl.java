@@ -14,6 +14,6 @@ public class DizCategoriaServiceImpl implements DizCategoriaService {
 
     @Override
     public List<DizCategoria> findAllByAttivo() {
-        return dizCategoriaRepository.findAll();
+        return dizCategoriaRepository.findAllByAttivo();
     }
 }
