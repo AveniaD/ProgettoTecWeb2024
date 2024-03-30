@@ -2,6 +2,7 @@ package com.uniparthenope.innervision.controller;
 
 import com.uniparthenope.innervision.service.diz.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,4 +30,7 @@ public class GestioneDizionariController {
 
 
     //Varie request GET dei vari dizionari
+
+    //@GetMapping("/getDizCategoria")
+
 }

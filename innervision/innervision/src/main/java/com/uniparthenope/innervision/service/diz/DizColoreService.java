@@ -1,10 +1,10 @@
 package com.uniparthenope.innervision.service.diz;
 
-import com.uniparthenope.innervision.entity.diz.DizColore;
+import com.uniparthenope.innervision.dto.diz.DizColoreDto;
 
 import java.util.List;
 
 public interface DizColoreService {
 
-    List<DizColore> findAllByAttivo();
+    List<DizColoreDto> findAllByAttivo();
 }
