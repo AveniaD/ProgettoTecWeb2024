@@ -6,8 +6,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "DIZ_COLORE")
-@Getter
-@Setter
 public class DizColore {
 
     @Id
@@ -20,4 +18,28 @@ public class DizColore {
 
     @Column(name = "ATTIVO", nullable = false, length = 1)
     private String attivo;
+
+    public Long getIdColore() {
+        return idColore;
+    }
+
+    public void setIdColore(Long idColore) {
+        this.idColore = idColore;
+    }
+
+    public String getDescColore() {
+        return descColore;
+    }
+
+    public void setDescColore(String descColore) {
+        this.descColore = descColore;
+    }
+
+    public String getAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(String attivo) {
+        this.attivo = attivo;
+    }
 }

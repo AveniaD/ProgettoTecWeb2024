@@ -6,8 +6,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "DIZ_STATO_CARRELLO")
-@Getter
-@Setter
 public class DizStatoCarrello {
 
     @Id
@@ -21,4 +19,27 @@ public class DizStatoCarrello {
     @Column(name = "ATTIVO", nullable = false, length = 1)
     private String attivo;
 
+    public Long getIdMarchio() {
+        return idMarchio;
+    }
+
+    public void setIdMarchio(Long idMarchio) {
+        this.idMarchio = idMarchio;
+    }
+
+    public String getDescStatoCarrello() {
+        return descStatoCarrello;
+    }
+
+    public void setDescStatoCarrello(String descStatoCarrello) {
+        this.descStatoCarrello = descStatoCarrello;
+    }
+
+    public String getAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(String attivo) {
+        this.attivo = attivo;
+    }
 }

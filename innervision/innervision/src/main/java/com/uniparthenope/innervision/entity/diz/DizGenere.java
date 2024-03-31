@@ -1,13 +1,9 @@
 package com.uniparthenope.innervision.entity.diz;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "DIZ_GENERE")
-@Getter
-@Setter
 public class DizGenere {
 
     @Id
@@ -20,4 +16,28 @@ public class DizGenere {
 
     @Column(name = "ATTIVO", nullable = false, length = 1)
     private String attivo;
+
+    public Long getIdGenere() {
+        return idGenere;
+    }
+
+    public void setIdGenere(Long idGenere) {
+        this.idGenere = idGenere;
+    }
+
+    public String getDescGenere() {
+        return descGenere;
+    }
+
+    public void setDescGenere(String descGenere) {
+        this.descGenere = descGenere;
+    }
+
+    public String getAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(String attivo) {
+        this.attivo = attivo;
+    }
 }

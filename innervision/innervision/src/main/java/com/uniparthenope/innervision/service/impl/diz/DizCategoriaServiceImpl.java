@@ -1,7 +1,6 @@
 package com.uniparthenope.innervision.service.impl.diz;
 
 import com.uniparthenope.innervision.dto.diz.DizCategoriaDto;
-import com.uniparthenope.innervision.entity.diz.DizCategoria;
 import com.uniparthenope.innervision.mapper.diz.DizCategoriaMapper;
 import com.uniparthenope.innervision.repository.diz.DizCategoriaRepository;
 import com.uniparthenope.innervision.service.diz.DizCategoriaService;
