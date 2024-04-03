@@ -1,15 +1,21 @@
 package com.uniparthenope.innervision.controller;
 
+import com.uniparthenope.innervision.dto.diz.*;
 import com.uniparthenope.innervision.service.diz.*;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,40 +23,144 @@ import java.util.Map;
 public class GestioneDizionariController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GestioneDizionariController.class);
+    private static final String DTO = "Dto";
+    private static final String MESSAGGIO = "Messaggio";
+    private static final String OPERAZIONE = "Operazione";
+    private static final String MESSAGGIO_ERORE = "Errore durante il recupero dei dati";
 
     @Autowired
-    DizCategoriaService dizCategoriaService;
+    private DizCategoriaService dizCategoriaService;
 
     @Autowired
-    DizColoreService dizColoreService;
+    private DizColoreService dizColoreService;
 
     @Autowired
-    DizGenereService dizGenereService;
+    private DizGenereService dizGenereService;
 
     @Autowired
-    DizMarchioService dizMarchioService;
+    private DizMarchioService dizMarchioService;
 
     @Autowired
-    DizStatoCarrelloService dizStatoCarrelloService;
+    private DizStatoCarrelloService dizStatoCarrelloService;
 
-    @Autowired
-    DizTipologiaUtenteService dizTipologiaUtenteService;
-
-
-    //Varie request GET dei vari dizionari
-
-    @GetMapping("/getDizCategoria")
+    @GetMapping(value = "/getDizCategoria", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni categorie degli occhiali",
+            notes = "Restituisce una lista di categorie disponibili.",
+            response = DizCategoriaDto.class)
     public ResponseEntity<Map<String, Object>> getDizCategoria(){
+        try {
+            LOGGER.info("Chiamata REST /getDizCategoria");
 
-        LOGGER.info("/getDizCategoria");
+            List<DizCategoriaDto> dto = dizCategoriaService.findAllByAttivo();
 
-        Map<String, Object> result = new HashMap<>();
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Lista delle categorie disponibili");
+            result.put(OPERAZIONE, "Info dati categoria");
 
-        result.put("Dto",dizCategoriaService.findAllByAttivo());
-        result.put("Messaggio", "Lista delle categorie disponibili");
-        result.put("Operazione", "Info dati categoria");
+            LOGGER.info("Fine chiamata Rest /getDizCategoria");
 
-        return ResponseEntity.ok().body(result);
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            LOGGER.error(MESSAGGIO_ERORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+        }
+    }
+
+    @GetMapping(value = "/getDizColore", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni i colori degli occhiali",
+            notes = "Restituisce una lista di colori disponibili.",
+            response = DizCategoriaDto.class)
+    public ResponseEntity<Map<String, Object>> getDizColore(){
+        try {
+            LOGGER.info("Chiamata REST /getDizColore");
+
+            List<DizColoreDto> dto = dizColoreService.findAllByAttivo();
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Lista dei colori disponibili");
+            result.put(OPERAZIONE, "Info dati colori");
+
+            LOGGER.info("Fine chiamata Rest /getDizColore");
+
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            LOGGER.error(MESSAGGIO_ERORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+        }
+    }
+
+    @GetMapping(value = "/getDizGenere", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni i generi degli occhiali",
+            notes = "Restituisce una lista di generi disponibili.",
+            response = DizCategoriaDto.class)
+    public ResponseEntity<Map<String, Object>> getDizGenere(){
+        try {
+            LOGGER.info("Chiamata REST /getDizGenere");
+
+            List<DizGenereDto> dto = dizGenereService.findAllByAttivo();
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Lista delle generi disponibili");
+            result.put(OPERAZIONE, "Info dati generi");
+
+            LOGGER.info("Fine chiamata Rest /getDizGenere");
+
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            LOGGER.error(MESSAGGIO_ERORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+        }
+    }
+
+    @GetMapping(value = "/getDizMarchio", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni i marchi degli occhiali",
+            notes = "Restituisce una lista di marchi disponibili.",
+            response = DizCategoriaDto.class)
+    public ResponseEntity<Map<String, Object>> getDizMarchio(){
+        try {
+            LOGGER.info("Chiamata REST /getDizMarchio");
+
+            List<DizMarchioDto> dto = dizMarchioService.findAllByAttivo();
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Lista delle marchi disponibili");
+            result.put(OPERAZIONE, "Info dati marchi");
+
+            LOGGER.info("Fine chiamata Rest /getDizMarchio");
+
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            LOGGER.error(MESSAGGIO_ERORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+        }
+    }
+
+    @GetMapping(value = "/getDizStatoCarrello", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni stati carrelli",
+            notes = "Restituisce una lista di stati carrelli disponibili.",
+            response = DizCategoriaDto.class)
+    public ResponseEntity<Map<String, Object>> getDizStatoCarrello(){
+        try {
+            LOGGER.info("Chiamata REST /getDizStatoCarrello");
+
+            List<DizStatoCarrelloDto> dto = dizStatoCarrelloService.findAllByAttivo();
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Lista delle categorie disponibili");
+            result.put(OPERAZIONE, "Info dati stati carrelli");
+
+            LOGGER.info("Fine chiamata Rest /getDizStatoCarrello");
+
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            LOGGER.error(MESSAGGIO_ERORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+        }
     }
 
 }
