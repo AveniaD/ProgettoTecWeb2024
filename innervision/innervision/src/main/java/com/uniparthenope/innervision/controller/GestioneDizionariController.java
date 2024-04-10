@@ -151,7 +151,7 @@ public class GestioneDizionariController {
 
             Map<String, Object> result = new HashMap<>();
             result.put(DTO, dto);
-            result.put(MESSAGGIO, "Lista delle categorie disponibili");
+            result.put(MESSAGGIO, "Lista degli stati del carrello disponibili");
             result.put(OPERAZIONE, "Info dati stati carrelli");
 
             LOGGER.info("Fine chiamata Rest /getDizStatoCarrello");
