@@ -29,6 +29,9 @@ public class Articolo {
     //Aggiungere da quante persone è stato salvato per supportare il sistema
     //di raccomandazioni?
 
+    @Column(name ="quantitaDisponibile")
+    private Integer quantitaDisponibile;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_DIZ_MARCHIO")
     private DizMarchio marchio;

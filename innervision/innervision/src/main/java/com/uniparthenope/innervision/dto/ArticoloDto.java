@@ -28,6 +28,8 @@ public class ArticoloDto {
     //Aggiungere da quante persone è stato salvato per supportare il sistema
     //di raccomandazioni?
 
+    private Integer quantitaDisponibile;
+
     private DizMarchio marchio;
 
     private DizGenere genere;
