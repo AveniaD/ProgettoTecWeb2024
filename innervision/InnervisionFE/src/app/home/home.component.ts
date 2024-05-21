@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ArticoloComponent } from '../articolo/articolo.component';
 import { Articolo } from '../interfaces/articolo';
+import { GestioneArticoliService } from '../services/gestione-articoli.service';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +15,14 @@ import { Articolo } from '../interfaces/articolo';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent {
 
-  readonly baseUrl = 'https://images.ray-ban.com/is/image/RayBan/8053672503968__002.png';
+  articoloList: Articolo[];
+  gestioneArticoliService: GestioneArticoliService = inject(GestioneArticoliService);
 
-  articoloMostrato: Articolo = {
-    id: 9999,
-    name: 'Test Occhiali',
-    photo: `${this.baseUrl}`,
-    availableUnits: 99
-  };
+  constructor() {
+    this.articoloList = this.gestioneArticoliService.getAllArticoli();
+  }
+
 }

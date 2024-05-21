@@ -4,6 +4,8 @@
     <button class="primary" type="button">Search</button>
   </form>
   <section class="results">
-    <app-articolo [articolo] = "articoloMostrato"></app-articolo>
+    <app-articolo
+    *ngFor= "let articolo of articoloList"
+    [articolo] = "articolo"></app-articolo>
   </section>
 </section>
