@@ -4,13 +4,16 @@ import { CommonModule } from '@angular/common';
 import { ArticoloComponent } from '../articolo/articolo.component';
 import { Articolo } from '../interfaces/articolo';
 import { GestioneArticoliService } from '../services/gestione-articoli.service';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
-    ArticoloComponent
+    ArticoloComponent,
+    RouterModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

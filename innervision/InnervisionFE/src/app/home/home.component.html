@@ -1,11 +1,12 @@
 <section>
   <form>
     <input type="text" placeholder="Ricerca occhiali">
-    <button class="primary" type="button">Search</button>
+    <button class="primary" type="button">Cerca</button>
   </form>
   <section class="results">
-    <app-articolo
-    *ngFor= "let articolo of articoloList"
-    [articolo] = "articolo"></app-articolo>
+    <a *ngFor= "let articolo of articoloList"
+        [routerLink]="['/details', articolo.id]">
+      <app-articolo [articolo] = "articolo"></app-articolo>
+    </a>
   </section>
 </section>
