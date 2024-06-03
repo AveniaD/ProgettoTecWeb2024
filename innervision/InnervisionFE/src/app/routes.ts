@@ -1,8 +1,13 @@
 import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+
 import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
+import { ServiceComponent } from './service/service.component';
 import { LoginComponent } from './login/login.component';
-import { NgModule } from '@angular/core';
+import { RegisterComponent } from './register/register.component';
+
+
 
 const routeConfig: Routes = [
   {
@@ -16,7 +21,22 @@ const routeConfig: Routes = [
     title: 'Dettagli articolo'
   },
   {
-    path: 'login/',
+    path: 'brand',
+    component: LoginComponent,
+    title: 'Ricerca per Brand'
+  },
+  {
+    path: 'services',
+    component: LoginComponent,
+    title: 'Servizi disponibili'
+  },
+  {
+    path: 'register',
+    component: LoginComponent,
+    title: 'Registrazione'
+  },
+  {
+    path: 'login',
     component: LoginComponent,
     title: 'Login'
   }
