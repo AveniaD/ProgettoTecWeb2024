@@ -1,1 +1,13 @@
-<p>login works!</p>
+<section class="listing-apply">
+  <h2 class="section-heading">Login</h2>
+  <form [formGroup]="applyForm" (submit)="submitLogin()">
+
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email">
+
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password">
+
+    <button type="submit" class="primary">Login</button>
+  </form>
+</section>

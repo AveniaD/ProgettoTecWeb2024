@@ -1,1 +1,21 @@
-<p>register works!</p>
+<section class="listing-apply">
+  <h2 class="section-heading">Registrazione</h2>
+  <form [formGroup]="applyForm" (submit)="submitRegistration()">
+    <label for="first-name">Nome</label>
+    <input id="first-name" type="text" formControlName="firstName">
+
+    <label for="last-name">Cognome</label>
+    <input id="last-name" type="text" formControlName="lastName">
+
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email">
+
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password">
+
+    <label for="checkPassword">Ripeti la password</label>
+    <input id="checkPassword" type="password" formControlName="checkPassword">
+
+    <button type="submit" class="primary">Registrati!</button>
+  </form>
+</section>

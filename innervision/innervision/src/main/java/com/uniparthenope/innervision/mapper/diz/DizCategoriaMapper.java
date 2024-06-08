@@ -3,7 +3,6 @@ package com.uniparthenope.innervision.mapper.diz;
 import com.uniparthenope.innervision.dto.diz.DizCategoriaDto;
 import com.uniparthenope.innervision.entity.diz.DizCategoria;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

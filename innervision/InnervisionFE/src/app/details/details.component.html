@@ -11,18 +11,4 @@
       <li>Descrizione: {{articolo?.description}}</li>
     </ul>
   </section>
-  <section class="listing-apply">
-    <h2 class="section-heading">Aggiungi all'ordine</h2>
-    <form [formGroup]="applyForm" (submit)="submitApplication()">
-      <label for="first-name">Nome</label>
-      <input id="first-name" type="text" formControlName="firstName">
-
-      <label for="last-name">Cognome</label>
-      <input id="last-name" type="text" formControlName="lastName">
-
-      <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email">
-      <button type="submit" class="primary">Aggiungi</button>
-    </form>
-  </section>
 </article>

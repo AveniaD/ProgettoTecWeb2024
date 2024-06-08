@@ -6,6 +6,7 @@ import { DetailsComponent } from './details/details.component';
 import { ServiceComponent } from './service/service.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { BrandComponent } from './brand/brand.component';
 
 
 
@@ -22,17 +23,17 @@ const routeConfig: Routes = [
   },
   {
     path: 'brand',
-    component: LoginComponent,
+    component: BrandComponent,
     title: 'Ricerca per Brand'
   },
   {
     path: 'services',
-    component: LoginComponent,
+    component: ServiceComponent,
     title: 'Servizi disponibili'
   },
   {
     path: 'register',
-    component: LoginComponent,
+    component: RegisterComponent,
     title: 'Registrazione'
   },
   {

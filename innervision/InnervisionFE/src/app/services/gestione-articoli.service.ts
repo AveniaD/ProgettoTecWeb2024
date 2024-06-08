@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Articolo } from '../interfaces/articolo';
 
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -71,7 +75,4 @@ export class GestioneArticoliService {
     return this.articoloList.find(articolo => articolo.id === id);
   }
 
-  submitApplication(firstName: string, lastName: string, email: string) {
-    console.log(`Form per ordinare le lenti: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
-  }
 }
