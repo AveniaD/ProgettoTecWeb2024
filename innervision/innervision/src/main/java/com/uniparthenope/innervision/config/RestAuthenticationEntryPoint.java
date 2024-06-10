@@ -1,4 +1,4 @@
-package com.uniparthenope.innervision.common;
+package com.uniparthenope.innervision.config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

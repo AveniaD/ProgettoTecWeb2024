@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { Articolo } from '../interfaces/articolo';
 import { GestioneArticoliService } from '../services/gestione-articoli.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -19,13 +20,15 @@ import { GestioneArticoliService } from '../services/gestione-articoli.service';
 
 export class DetailsComponent {
 
-  gestioneArticoliService: GestioneArticoliService = new GestioneArticoliService;
+  gestioneArticoliService: GestioneArticoliService = new GestioneArticoliService(
+    inject(HttpClient)
+  );
   articolo: Articolo | undefined;
   route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor() {
     const articoloId = parseInt(this.route.snapshot.params['id'], 3);
-    this.articolo = this.gestioneArticoliService.getArticoliById(articoloId);
+    //this.articolo = this.gestioneArticoliService.getArticoliById(articoloId);
   }
 
 }

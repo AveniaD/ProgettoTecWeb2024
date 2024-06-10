@@ -1,7 +1,12 @@
 export interface Articolo {
-  id: number;
-  name: string;
-  photo: string;
-  availableUnits: number;
-  description: string;
+  idArticolo: number;
+  nome: string;
+  foto: string;
+  quantitaDisponibile: number;
+  descrizione: string;
+  marchio: any;
+  genere: any;
+  coloreMontatura: any;
+  coloreLente: any;
+  categoria: any;
 }

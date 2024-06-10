@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
 
 export class HomeComponent {
 
-  articoloList: Articolo[];
+  articoloList: any
   gestioneArticoliService: GestioneArticoliService = inject(GestioneArticoliService);
 
   constructor() {

@@ -4,19 +4,9 @@ import com.uniparthenope.innervision.entity.diz.DizCategoria;
 import com.uniparthenope.innervision.entity.diz.DizColore;
 import com.uniparthenope.innervision.entity.diz.DizGenere;
 import com.uniparthenope.innervision.entity.diz.DizMarchio;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ArticoloDto {
 
     private Long idArticolo;
@@ -27,6 +17,10 @@ public class ArticoloDto {
 
     //Aggiungere da quante persone è stato salvato per supportare il sistema
     //di raccomandazioni?
+
+    private String foto;
+
+    private String descrizione;
 
     private Integer quantitaDisponibile;
 
@@ -39,4 +33,112 @@ public class ArticoloDto {
     private DizColore coloreLente;
 
     private DizCategoria categoria;
+
+    public ArticoloDto() {
+    }
+
+    public ArticoloDto(Long idArticolo, String nome, Integer recensioni, String foto,
+                       String descrizione, Integer quantitaDisponibile,
+                       DizMarchio marchio, DizGenere genere, DizColore coloreMontatura,
+                       DizColore coloreLente, DizCategoria categoria) {
+        this.idArticolo = idArticolo;
+        this.nome = nome;
+        this.recensioni = recensioni;
+        this.foto = foto;
+        this.descrizione = descrizione;
+        this.quantitaDisponibile = quantitaDisponibile;
+        this.marchio = marchio;
+        this.genere = genere;
+        this.coloreMontatura = coloreMontatura;
+        this.coloreLente = coloreLente;
+        this.categoria = categoria;
+    }
+
+    public Long getIdArticolo() {
+        return idArticolo;
+    }
+
+    public void setIdArticolo(Long idArticolo) {
+        this.idArticolo = idArticolo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Integer getRecensioni() {
+        return recensioni;
+    }
+
+    public void setRecensioni(Integer recensioni) {
+        this.recensioni = recensioni;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public Integer getQuantitaDisponibile() {
+        return quantitaDisponibile;
+    }
+
+    public void setQuantitaDisponibile(Integer quantitaDisponibile) {
+        this.quantitaDisponibile = quantitaDisponibile;
+    }
+
+    public DizMarchio getMarchio() {
+        return marchio;
+    }
+
+    public void setMarchio(DizMarchio marchio) {
+        this.marchio = marchio;
+    }
+
+    public DizGenere getGenere() {
+        return genere;
+    }
+
+    public void setGenere(DizGenere genere) {
+        this.genere = genere;
+    }
+
+    public DizColore getColoreMontatura() {
+        return coloreMontatura;
+    }
+
+    public void setColoreMontatura(DizColore coloreMontatura) {
+        this.coloreMontatura = coloreMontatura;
+    }
+
+    public DizColore getColoreLente() {
+        return coloreLente;
+    }
+
+    public void setColoreLente(DizColore coloreLente) {
+        this.coloreLente = coloreLente;
+    }
+
+    public DizCategoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(DizCategoria categoria) {
+        this.categoria = categoria;
+    }
 }

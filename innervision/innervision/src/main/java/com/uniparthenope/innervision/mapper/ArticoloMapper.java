@@ -3,7 +3,6 @@ package com.uniparthenope.innervision.mapper;
 import com.uniparthenope.innervision.dto.ArticoloDto;
 import com.uniparthenope.innervision.entity.Articolo;
 import org.mapstruct.Mapper;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")

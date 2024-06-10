@@ -18,23 +18,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class BasicAuthConfiguration {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.withUsername("user")
-                .password("{noop}password")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .cors(withDefaults())
-                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/login").permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(withDefaults());
+        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }

@@ -11,9 +11,13 @@ import { environment } from '../environment';
 
 export class GestioneArticoliService {
 
+  constructor(private http: HttpClient) { }
+
   readonly baseUrl = 'https://images.ray-ban.com/is/image/RayBan/8053672503968__002.png';
 
-  articoloList: Articolo[] = [
+  readonly apiUrl = environment.apiUrl + '/articoli';
+
+  /*articoloList: Articolo[] = [
     {
       id: 1,
       name: 'Ray ban neri',
@@ -65,14 +69,16 @@ export class GestioneArticoliService {
     }
   ];
 
-  constructor() { }
-
   getAllArticoli(): Articolo[] {
     return this.articoloList;
+  }*/
+
+  getAllArticoli(): Observable<any> {
+    return this.http.get(this.apiUrl + '/getAllArticoli');
   }
 
-  getArticoliById(id: number): Articolo | undefined {
-    return this.articoloList.find(articolo => articolo.id === id);
-  }
+  /*getArticoliById(id: number): Articolo | undefined {
+    return this.articoloList.find(articolo => articolo.idArticolo === id);<
+  }*/
 
 }

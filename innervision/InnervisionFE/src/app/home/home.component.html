@@ -5,7 +5,7 @@
   </form>
   <section class="results">
     <a *ngFor= "let articolo of articoloList"
-        [routerLink]="['/details', articolo.id]">
+        [routerLink]="['/details', articolo.idArticolo]">
       <app-articolo [articolo] = "articolo"></app-articolo>
     </a>
   </section>
