@@ -1,12 +1,5 @@
 package com.uniparthenope.innervision.dto.diz;
 
-import lombok.*;
-
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class DizCategoriaDto {
 
     private Long idCategoria;

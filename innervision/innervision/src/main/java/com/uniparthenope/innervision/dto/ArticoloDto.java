@@ -4,8 +4,6 @@ import com.uniparthenope.innervision.entity.diz.DizCategoria;
 import com.uniparthenope.innervision.entity.diz.DizColore;
 import com.uniparthenope.innervision.entity.diz.DizGenere;
 import com.uniparthenope.innervision.entity.diz.DizMarchio;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 public class ArticoloDto {
 
