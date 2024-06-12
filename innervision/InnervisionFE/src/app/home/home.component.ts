@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ArticoloComponent } from '../articolo/articolo.component';
@@ -19,13 +19,21 @@ import { RouterModule } from '@angular/router';
   styleUrl: './home.component.css'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  articoloList: any
-  gestioneArticoliService: GestioneArticoliService = inject(GestioneArticoliService);
+  articoloList: Articolo[] = [];
 
-  constructor() {
-    this.articoloList = this.gestioneArticoliService.getAllArticoli();
+  constructor(private gestioneArticoliService: GestioneArticoliService) { }
+
+  ngOnInit(): void {
+    this.gestioneArticoliService.getAllArticoli().subscribe(
+      (data: Articolo[]) => {
+        this.articoloList = data;
+      },
+      error => {
+        console.error('Errore durante il recupero degli articoli', error);
+      }
+    );
   }
 
 }

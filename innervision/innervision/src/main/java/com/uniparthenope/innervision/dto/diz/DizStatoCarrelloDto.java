@@ -5,18 +5,18 @@ import lombok.Setter;
 
 public class DizStatoCarrelloDto {
 
-    private Long idMarchio;
+    private Long idStatoCarrello;
 
     private String descStatoCarrello;
 
     private String attivo;
 
     public Long getIdMarchio() {
-        return idMarchio;
+        return idStatoCarrello;
     }
 
     public void setIdMarchio(Long idMarchio) {
-        this.idMarchio = idMarchio;
+        this.idStatoCarrello = idMarchio;
     }
 
     public String getDescStatoCarrello() {

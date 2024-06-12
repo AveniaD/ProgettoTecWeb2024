@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Articolo } from '../interfaces/articolo';
 
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from '../environment';
 
 @Injectable({
@@ -17,68 +17,20 @@ export class GestioneArticoliService {
 
   readonly apiUrl = environment.apiUrl + '/articoli';
 
-  /*articoloList: Articolo[] = [
-    {
-      id: 1,
-      name: 'Ray ban neri',
-      photo: this.baseUrl,
-      availableUnits: 3,
-      description: 'descrizione 1'
-    },
-    {
-      id: 2,
-      name: 'Occhiali da vista bianchi',
-      photo: this.baseUrl,
-      availableUnits: 3,
-      description: 'descrizione 1'
-    },
-    {
-      id: 3,
-      name: 'Test Occhiali',
-      photo: this.baseUrl,
-      availableUnits: 3,
-      description: 'descrizione 1'
-    },
-    {
-      id: 4,
-      name: 'Test Occhiali',
-      photo: this.baseUrl,
-      availableUnits: 3,
-      description: 'descrizione 1'
-    },
-    {
-      id: 5,
-      name: 'Test Occhiali',
-      photo: this.baseUrl,
-      availableUnits: 3,
-      description: 'descrizione 1'
-    },
-    {
-      id: 6,
-      name: 'Test Occhiali',
-      photo: this.baseUrl,
-      availableUnits: 3,
-      description: 'descrizione 1'
-    },
-    {
-      id: 7,
-      name: 'Test Occhiali',
-      photo: this.baseUrl,
-      availableUnits: 3,
-      description: 'descrizione 1'
-    }
-  ];
-
-  getAllArticoli(): Articolo[] {
-    return this.articoloList;
-  }*/
-
-  getAllArticoli(): Observable<any> {
-    return this.http.get(this.apiUrl + '/getAllArticoli');
+  getAllArticoli(): Observable<Articolo[]> {
+    console.log(this.apiUrl + '/getAllArticoli');
+    return this.http.get<{Messaggio: string, Operazione: string, Dto: Articolo[]}>(
+      this.apiUrl + '/getAllArticoli').pipe(map(response => {
+        console.log('Messaggio:', response.Messaggio);
+        console.log('Operazione:', response.Operazione);
+        console.log('Operazione:', response.Dto);
+        return response.Dto;
+      })
+    );
   }
 
   /*getArticoliById(id: number): Articolo | undefined {
-    return this.articoloList.find(articolo => articolo.idArticolo === id);<
+    return this.articoloList.find(articolo => articolo.idArticolo === id);
   }*/
 
 }
