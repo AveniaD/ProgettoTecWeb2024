@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface ArticoloService {
     List<ArticoloDto> findAllArticoli();
+
+    ArticoloDto findArticoloById(Long idArticolo);
+
+    List<ArticoloDto> findArticoloByNome(String nome);
 }

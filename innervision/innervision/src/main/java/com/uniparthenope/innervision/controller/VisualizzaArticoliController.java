@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -56,7 +57,53 @@ public class VisualizzaArticoliController {
         }
     }
 
-    //Visualizza articolo specifico
+    @GetMapping(value = "/getArticoloById", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni un articolo tramite un id",
+            notes = "Restituisce un articolo tramite un id.",
+            response = ArticoloDto.class)
+    public ResponseEntity<Map<String, Object>> getArticoloById(@RequestParam Long id){
+        try{
+            LOGGER.info("Chiamata REST /getArticoloById");
 
-    //Mostra articoli con filtri
+            ArticoloDto dto = articoloService.findArticoloById(id);
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Articolo trovato tramite id");
+            result.put(OPERAZIONE, "Info Articolo");
+
+            LOGGER.info("Fine chiamata Rest /getArticoloById");
+
+            return ResponseEntity.ok().body(result);
+        }catch (Exception e){
+            LOGGER.error(MESSAGGIO_ERORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+
+        }
+    }
+
+    @GetMapping(value = "/getArticoloByNome", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni un articolo tramite un id",
+            notes = "Restituisce un articolo tramite un id.",
+            response = ArticoloDto.class)
+    public ResponseEntity<Map<String, Object>> getArticoloByNome(@RequestParam String nome){
+        try{
+            LOGGER.info("Chiamata REST /getArticoloByNome");
+
+            List<ArticoloDto> dto = articoloService.findArticoloByNome(nome);
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Articoli trovati tramite nome");
+            result.put(OPERAZIONE, "Info Articolo");
+
+            LOGGER.info("Fine chiamata Rest /getArticoloByNome");
+
+            return ResponseEntity.ok().body(result);
+        }catch (Exception e){
+            LOGGER.error(MESSAGGIO_ERORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+
+        }
+    }
 }

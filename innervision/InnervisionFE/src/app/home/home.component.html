@@ -1,7 +1,11 @@
 <section>
-  <form>
-    <input type="text" placeholder="Ricerca occhiali">
-    <button class="primary" type="button">Cerca</button>
+  <form (ngSubmit)="ricercaPerNome()">
+    <input
+      type="text"
+      placeholder="Ricerca occhiali"
+      [(ngModel)]="ricercaNome"
+      name="nome">
+    <button class="primary" type="submit">Cerca</button>
   </form>
   <section class="results">
     <a *ngFor= "let articolo of articoloList"

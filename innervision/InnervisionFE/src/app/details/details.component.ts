@@ -23,12 +23,19 @@ export class DetailsComponent {
   gestioneArticoliService: GestioneArticoliService = new GestioneArticoliService(
     inject(HttpClient)
   );
-  articolo: Articolo | undefined;
+  articolo!: Articolo;
   route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor() {
-    const articoloId = parseInt(this.route.snapshot.params['id'], 3);
-    //this.articolo = this.gestioneArticoliService.getArticoliById(articoloId);
+    const idArticolo = parseInt(this.route.snapshot.params['id']);
+    this.gestioneArticoliService.getArticoliById(idArticolo).subscribe(
+      (data: Articolo) => {
+        this.articolo = data;
+      },
+      error => {
+        console.error('Errore durante il recupero dell articolo', error);
+      }
+    );
   }
 
 }
