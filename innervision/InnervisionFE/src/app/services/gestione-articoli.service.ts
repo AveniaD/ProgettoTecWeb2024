@@ -45,7 +45,7 @@ export class GestioneArticoliService {
       this.apiUrl + '/getArticoliByNome?nome='+ nome).pipe(map(response => {
         console.log('Messaggio:', response.Messaggio);
         console.log('Operazione:', response.Operazione);
-        console.log('Operazione:', response.Dto);
+        console.log('Risultato:', response.Dto);
         return response.Dto;
       })
     );

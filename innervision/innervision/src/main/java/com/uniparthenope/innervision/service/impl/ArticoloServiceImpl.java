@@ -33,6 +33,6 @@ public class ArticoloServiceImpl implements ArticoloService {
 
     @Override
     public List<ArticoloDto> findArticoloByNome(String nome) {
-        return null;
+        return articoloMapper.toDtoList(articoloRepository.findArticoloByNome(nome));
     }
 }

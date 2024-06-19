@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ArticoloRepository extends JpaRepository<Articolo, Long> {
 
-    @Query(value = "SELECT * FROM articolo a WHERE a.nome = LIKE '%?1%'",nativeQuery = true)
+    @Query(value = "SELECT * FROM Articolo WHERE nome LIKE %:nome%",nativeQuery = true)
     List<Articolo> findArticoloByNome(@Param("nome") String nome);
 }

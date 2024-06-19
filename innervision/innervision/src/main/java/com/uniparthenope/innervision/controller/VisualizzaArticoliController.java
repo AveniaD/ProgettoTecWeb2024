@@ -82,13 +82,13 @@ public class VisualizzaArticoliController {
         }
     }
 
-    @GetMapping(value = "/getArticoloByNome", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/getArticoliByNome", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Ottieni un articolo tramite un id",
             notes = "Restituisce un articolo tramite un id.",
             response = ArticoloDto.class)
-    public ResponseEntity<Map<String, Object>> getArticoloByNome(@RequestParam String nome){
+    public ResponseEntity<Map<String, Object>> getArticoliByNome(@RequestParam String nome){
         try{
-            LOGGER.info("Chiamata REST /getArticoloByNome");
+            LOGGER.info("Chiamata REST /getArticoliByNome");
 
             List<ArticoloDto> dto = articoloService.findArticoloByNome(nome);
 
@@ -97,7 +97,7 @@ public class VisualizzaArticoliController {
             result.put(MESSAGGIO, "Articoli trovati tramite nome");
             result.put(OPERAZIONE, "Info Articolo");
 
-            LOGGER.info("Fine chiamata Rest /getArticoloByNome");
+            LOGGER.info("Fine chiamata Rest /getArticoliByNome");
 
             return ResponseEntity.ok().body(result);
         }catch (Exception e){

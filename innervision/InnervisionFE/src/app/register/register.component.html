@@ -1,6 +1,6 @@
 <section class="listing-apply">
-  <h2 class="section-heading">Registrazione</h2>
   <form [formGroup]="applyForm" (submit)="submitRegistration()">
+    <h3 class="section-heading">Registrazione</h3>
     <label for="first-name">Nome</label>
     <input id="first-name" type="text" formControlName="firstName">
 
@@ -16,6 +16,6 @@
     <label for="checkPassword">Ripeti la password</label>
     <input id="checkPassword" type="password" formControlName="checkPassword">
 
-    <button type="submit" class="primary">Registrati!</button>
+    <button type="submit" class="primary" href="#">Registrati!</button>
   </form>
 </section>
