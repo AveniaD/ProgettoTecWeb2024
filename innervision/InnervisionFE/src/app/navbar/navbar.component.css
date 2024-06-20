@@ -10,6 +10,12 @@
   align-items: center;
 }
 
+.navbar-logo a img{
+  height: 55px;
+  width: 155px;
+  margin: 2%;
+}
+
 .navbar-links {
   display: flex;
   list-style: none;

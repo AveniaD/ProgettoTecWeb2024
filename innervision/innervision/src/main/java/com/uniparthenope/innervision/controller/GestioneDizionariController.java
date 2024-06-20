@@ -18,15 +18,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.uniparthenope.innervision.common.DefaultStrings.*;
+
 @RestController
 @RequestMapping("/dizionari")
 public class GestioneDizionariController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GestioneDizionariController.class);
-    private static final String DTO = "Dto";
-    private static final String MESSAGGIO = "Messaggio";
-    private static final String OPERAZIONE = "Operazione";
-    private static final String MESSAGGIO_ERORE = "Errore durante il recupero dei dati";
 
     @Autowired
     private DizCategoriaService dizCategoriaService;

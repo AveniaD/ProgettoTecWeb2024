@@ -1,5 +1,7 @@
 package com.uniparthenope.innervision.controller;
 
+import static com.uniparthenope.innervision.common.DefaultStrings.*;
+
 import com.uniparthenope.innervision.dto.ArticoloDto;
 import com.uniparthenope.innervision.service.ArticoloService;
 import io.swagger.annotations.ApiOperation;
@@ -24,10 +26,6 @@ import java.util.Map;
 public class VisualizzaArticoliController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VisualizzaArticoliController.class);
-    private static final String DTO = "Dto";
-    private static final String MESSAGGIO = "Messaggio";
-    private static final String OPERAZIONE = "Operazione";
-    private static final String MESSAGGIO_ERORE = "Errore durante il recupero dei dati";
 
     @Autowired
     private ArticoloService articoloService;
