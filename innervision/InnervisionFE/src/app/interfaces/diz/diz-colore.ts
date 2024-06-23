@@ -1,6 +1,6 @@
-export interface DizColore {
+export class DizColore {
 
-  idColore: number;
-  descColore: string;
-  attivo: string;
+  idColore!: number;
+  descColore!: string;
+  attivo!: string;
 }

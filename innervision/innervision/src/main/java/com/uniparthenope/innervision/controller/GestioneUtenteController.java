@@ -10,11 +10,9 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,24 +34,29 @@ public class GestioneUtenteController {
             response = UtenteDto.class)
     public ResponseEntity<Map<String, Object>> registerUser(@RequestBody Utente utenteInInput) {
         try {
-            LOGGER.info("Chiamata REST /getDizCategoria");
+            LOGGER.info("Chiamata REST /register");
 
             Long idUtenteRegistrato = utenteService.registrazione(utenteInInput);
 
             Map<String, Object> result = new HashMap<>();
             result.put(DTO, idUtenteRegistrato);
-            result.put(MESSAGGIO, "Lista delle categorie disponibili");
-            result.put(OPERAZIONE, "Info dati categoria");
+            result.put(MESSAGGIO, "Registrazione avvenuta con successo");
+            result.put(OPERAZIONE, "Registrazione Utente");
 
-            LOGGER.info("Fine chiamata Rest /getDizCategoria");
+            LOGGER.info("Fine chiamata Rest /register");
 
             return ResponseEntity.ok().body(result);
 
         } catch (Exception e) {
-            LOGGER.error(MESSAGGIO_ERORE, e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
-            // Da gestire diversamente in questo caso
-            // return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, -1); //-1 utente già presente, da inserire più messaggi
+            result.put(MESSAGGIO, "Registrazione non avvenuta");
+            result.put(OPERAZIONE, "Registrazione Utente");
+
+            LOGGER.info("Errore nella chiamata Rest /register");
+
+            return ResponseEntity.ok().body(result);
         }
     }
 

@@ -1,5 +1,5 @@
-export interface DizGenere {
-  idGenere: number;
-  descGenere: string;
-  attivo: string;
+export class DizGenere {
+  idGenere!: number;
+  descGenere!: string;
+  attivo!: string;
 }

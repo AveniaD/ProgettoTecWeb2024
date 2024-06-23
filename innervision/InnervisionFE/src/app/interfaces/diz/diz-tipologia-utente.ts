@@ -1,6 +1,6 @@
-export interface DizTipologiaUtente {
+export class DizTipologiaUtente {
 
-  idTipologiaUtente: number;
-  descTipologiaUtente: string;
-  attivo: string;
+  idTipologiaUtente!: number;
+  descTipologiaUtente!: string;
+  attivo!: string;
 }

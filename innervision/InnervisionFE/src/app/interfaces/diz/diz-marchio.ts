@@ -1,5 +1,5 @@
-export interface DizMarchio {
-  idMarchio: number;
-  descMarchio: string;
-  attivo: string;
+export class DizMarchio {
+  idMarchio!: number;
+  descMarchio!: string;
+  attivo!: string;
 }

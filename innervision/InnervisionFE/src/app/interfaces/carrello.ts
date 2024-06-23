@@ -1,2 +1,2 @@
-export interface Carrello {
+export class Carrello {
 }

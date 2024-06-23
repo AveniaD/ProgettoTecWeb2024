@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Injectable } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GestioneSignService } from '../services/gestione-sign.service';
+import { GestioneUtenteService } from '../services/gestione-utente.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ import { GestioneSignService } from '../services/gestione-sign.service';
 
 export class LoginComponent {
 
-  gestioneSignService: GestioneSignService = new GestioneSignService;
+  constructor(private gestioneUtenteService: GestioneUtenteService,
+    private router: Router
+  ){}
 
   applyForm = new FormGroup({
     email: new FormControl(''),
@@ -23,7 +26,7 @@ export class LoginComponent {
   });
 
   submitLogin() {
-    this.gestioneSignService.submitLogin(
+    this.gestioneUtenteService.login(
       this.applyForm.value.email ?? '',
       this.applyForm.value.password ?? ''
     );

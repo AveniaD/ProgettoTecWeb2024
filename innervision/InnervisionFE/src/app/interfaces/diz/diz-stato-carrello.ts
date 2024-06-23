@@ -1,6 +1,5 @@
-export interface DizStatoCarrello {
-
-  idStatoCarrello: number;
-  descStatoCarrello: string;
-  attivo: string;
+export class DizStatoCarrello {
+  idStatoCarrello!: number;
+  descStatoCarrello!: string;
+  attivo!: string;
 }

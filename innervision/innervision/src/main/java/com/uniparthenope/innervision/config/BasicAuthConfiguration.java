@@ -21,7 +21,13 @@ public class BasicAuthConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable);
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authz) -> authz
+                    .requestMatchers("/user/register").permitAll()
+                    .requestMatchers("/articoli/*").permitAll()
+                    .requestMatchers("/dizionari/*").permitAll()
+                .anyRequest().authenticated()
+        );
         return http.build();
     }
 
@@ -29,13 +35,5 @@ public class BasicAuthConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/api/users/register").permitAll()
-                .anyRequest().authenticated();
-    } Da aggiornare e gestire prima di applicare tutta la sicurezza*/
 
 }

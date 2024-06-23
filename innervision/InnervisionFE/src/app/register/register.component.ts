@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GestioneSignService } from '../services/gestione-sign.service';
+import { GestioneUtenteService } from '../services/gestione-utente.service';
 import { CommonModule } from '@angular/common';
+import { Utente } from '../interfaces/utente';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    RouterModule
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -16,23 +20,41 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
 
   applyForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    nome: new FormControl(''),
+    cognome: new FormControl(''),
+    username: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
     checkPassword: new FormControl('')
   });
 
-  gestioneSignService: GestioneSignService = new GestioneSignService;
+  constructor(private gestioneUtenteService: GestioneUtenteService,
+    private router: Router
+  ){}
 
   submitRegistration() {
-    this.gestioneSignService.submitRegistration(
-      this.applyForm.value.firstName ?? '',
-      this.applyForm.value.lastName ?? '',
-      this.applyForm.value.email ?? '',
-      this.applyForm.value.password ?? '',
-      this.applyForm.value.checkPassword ?? ''
-    );
+
+    if(this.applyForm.value.password!= this.applyForm.value.checkPassword){
+      alert("Le password non coincidono");
+    }else{
+      let utente = new Utente(
+        this.applyForm.value.nome? this.applyForm.value.nome : '',
+        this.applyForm.value.cognome? this.applyForm.value.cognome : '',
+        this.applyForm.value.username? this.applyForm.value.username : '',
+        this.applyForm.value.username? this.applyForm.value.username : '',
+        this.applyForm.value.password? this.applyForm.value.password : ''
+      );
+
+      this.gestioneUtenteService.register(utente).subscribe(
+        (response: any) => {
+          console.log('Registrazione avvenuta con successo!', response);
+          this.router.navigate(['/welcome']);
+        },
+        error => {
+          console.error('Errore durante la registrazione', error);
+        }
+      );
+    }
   }
 
 }

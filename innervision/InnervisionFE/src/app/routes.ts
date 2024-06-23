@@ -7,8 +7,7 @@ import { ServiceComponent } from './service/service.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BrandComponent } from './brand/brand.component';
-
-
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routeConfig: Routes = [
   {
@@ -40,6 +39,11 @@ const routeConfig: Routes = [
     path: 'login',
     component: LoginComponent,
     title: 'Login'
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent,
+    title: 'Welcome'
   }
 ];
 

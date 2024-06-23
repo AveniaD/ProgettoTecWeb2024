@@ -1,5 +1,5 @@
-export interface DizCategoria {
-  idCategoria: number;
-  descCategoria: string;
-  attivo: string;
+export class DizCategoria {
+  idCategoria!: number;
+  descCategoria!: string;
+  attivo!: string;
 }

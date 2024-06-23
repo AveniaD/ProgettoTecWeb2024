@@ -13,7 +13,6 @@ public class UtenteServiceImpl implements UtenteService {
     @Autowired
     private UtenteRepository utenteRepository;
 
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     public Long registrazione(Utente utente) {
