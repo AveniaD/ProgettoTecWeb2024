@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -51,7 +50,7 @@ public class GestioneUtenteController {
 
             Map<String, Object> result = new HashMap<>();
             result.put(DTO, -1);
-            result.put(MESSAGGIO, "Registrazione non avvenuta");
+            result.put(MESSAGGIO, "Registrazione fallita");
             result.put(OPERAZIONE, "Registrazione Utente");
 
             LOGGER.info("Errore nella chiamata Rest /register");
@@ -61,5 +60,36 @@ public class GestioneUtenteController {
         }
     }
 
-    //Login
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Effettua la registrazione di un utente",
+            notes = "Restituisce l'utente registrato.",
+            response = UtenteDto.class)
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Utente utenteInInput) {
+        try {
+            LOGGER.info("Chiamata REST /login");
+
+            String tokenLogin = utenteService.login(utenteInInput);
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, tokenLogin);
+            result.put(MESSAGGIO, "Login avvenuta con successo");
+            result.put(OPERAZIONE, "Login Utente");
+
+            LOGGER.info("Fine chiamata Rest /Login");
+
+            return ResponseEntity.ok().body(result);
+
+        } catch (Exception e) {
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, -1);
+            result.put(MESSAGGIO, "Login fallito");
+            result.put(OPERAZIONE, "Login Utente");
+
+            LOGGER.info("Errore nella chiamata Rest /Login");
+            LOGGER.error(MESSAGGIO_ERRORE, e);
+
+            return ResponseEntity.ok().body(result);
+        }
+    }
 }
