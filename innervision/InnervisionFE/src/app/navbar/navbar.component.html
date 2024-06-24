@@ -12,13 +12,17 @@
         <div>
           <ul>
             <h3>Categorie</h3>
-            <li *ngFor="let categorie of categorieDisponibili">{{ categorie.descCategoria }}</li>
+            <li *ngFor="let categorie of categorieDisponibili">
+              <a href="#">{{ categorie.descCategoria }}</a>
+            </li>
           </ul>
         </div>
         <div>
           <ul>
             <h3>Marche</h3>
-            <li *ngFor="let marche of marcheDisponibili">{{ marche.descMarchio }}</li>
+            <li *ngFor="let marche of marcheDisponibili">
+              <a href="#">{{ marche.descMarchio }}</a>
+            </li>
           </ul>
         </div>
       </div>

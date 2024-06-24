@@ -50,11 +50,12 @@ public class GestioneUtenteController {
         } catch (Exception e) {
 
             Map<String, Object> result = new HashMap<>();
-            result.put(DTO, -1); //-1 utente già presente, da inserire più messaggi
+            result.put(DTO, -1);
             result.put(MESSAGGIO, "Registrazione non avvenuta");
             result.put(OPERAZIONE, "Registrazione Utente");
 
             LOGGER.info("Errore nella chiamata Rest /register");
+            LOGGER.error(MESSAGGIO_ERRORE, e);
 
             return ResponseEntity.ok().body(result);
         }

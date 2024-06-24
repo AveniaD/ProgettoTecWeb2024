@@ -49,8 +49,8 @@ public class VisualizzaArticoliController {
 
             return ResponseEntity.ok().body(result);
         }catch (Exception e){
-            LOGGER.error(MESSAGGIO_ERORE, e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+            LOGGER.error(MESSAGGIO_ERRORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERRORE, e);
 
         }
     }
@@ -74,8 +74,8 @@ public class VisualizzaArticoliController {
 
             return ResponseEntity.ok().body(result);
         }catch (Exception e){
-            LOGGER.error(MESSAGGIO_ERORE, e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+            LOGGER.error(MESSAGGIO_ERRORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERRORE, e);
 
         }
     }
@@ -99,8 +99,8 @@ public class VisualizzaArticoliController {
 
             return ResponseEntity.ok().body(result);
         }catch (Exception e){
-            LOGGER.error(MESSAGGIO_ERORE, e);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERORE, e);
+            LOGGER.error(MESSAGGIO_ERRORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERRORE, e);
 
         }
     }

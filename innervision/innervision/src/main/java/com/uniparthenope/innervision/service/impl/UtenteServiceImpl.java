@@ -5,6 +5,7 @@ import com.uniparthenope.innervision.repository.UtenteRepository;
 import com.uniparthenope.innervision.service.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,8 @@ public class UtenteServiceImpl implements UtenteService {
     @Autowired
     private UtenteRepository utenteRepository;
 
-    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Long registrazione(Utente utente) {
         if (utenteRepository.existsByUsername(utente.getUsername())) {

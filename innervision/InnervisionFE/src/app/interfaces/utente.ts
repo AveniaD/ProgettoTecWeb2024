@@ -18,7 +18,7 @@ export class Utente {
       this.username = username;
       this.email = email;
       this.password = password;
-      this.tipologiaUtente = new DizTipologiaUtente;
+      this.tipologiaUtente = new DizTipologiaUtente(1, "Cliente","S");
       this.carrello = new Array<Articolo>();
   }
 }
