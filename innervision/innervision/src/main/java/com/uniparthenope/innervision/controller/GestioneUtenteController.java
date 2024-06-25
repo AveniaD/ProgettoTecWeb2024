@@ -2,6 +2,7 @@ package com.uniparthenope.innervision.controller;
 
 import static com.uniparthenope.innervision.common.DefaultStrings.*;
 
+import com.uniparthenope.innervision.common.RequestLogin;
 import com.uniparthenope.innervision.dto.UtenteDto;
 import com.uniparthenope.innervision.dto.diz.DizCategoriaDto;
 import com.uniparthenope.innervision.entity.Utente;
@@ -64,11 +65,11 @@ public class GestioneUtenteController {
     @ApiOperation(value = "Effettua la registrazione di un utente",
             notes = "Restituisce l'utente registrato.",
             response = UtenteDto.class)
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Utente utenteInInput) {
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody RequestLogin requestLogin) {
         try {
             LOGGER.info("Chiamata REST /login");
 
-            String tokenLogin = utenteService.login(utenteInInput);
+            String tokenLogin = utenteService.login(requestLogin);
 
             Map<String, Object> result = new HashMap<>();
             result.put(DTO, tokenLogin);

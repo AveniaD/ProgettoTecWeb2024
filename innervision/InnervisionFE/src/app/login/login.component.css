@@ -3,14 +3,21 @@ a:link, a:visited, a:hover, a:active {
   color: inherit;
 }
 
-.listing-apply .section-heading {
-  font-size: 18pt;
-  margin-bottom: 15px;
+.form-login {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.section-heading {
+  font-size: 15pt;
+  margin-bottom: 5%;
 }
 
 label, input {
   display: block;
 }
+
 label {
   color: var(--secondary-color);
   font-weight: bold;

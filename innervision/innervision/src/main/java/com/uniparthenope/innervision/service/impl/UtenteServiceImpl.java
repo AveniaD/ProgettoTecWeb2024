@@ -1,5 +1,6 @@
 package com.uniparthenope.innervision.service.impl;
 
+import com.uniparthenope.innervision.common.RequestLogin;
 import com.uniparthenope.innervision.entity.Utente;
 import com.uniparthenope.innervision.repository.UtenteRepository;
 import com.uniparthenope.innervision.service.UtenteService;
@@ -43,9 +44,9 @@ public class UtenteServiceImpl implements UtenteService {
     }
 
     @Override
-    public String login(Utente utente) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(utente.getUsername(), utente.getPassword()));
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(utente.getUsername());
+    public String login(RequestLogin requestLogin) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestLogin.getUsername(), requestLogin.getPassword()));
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(requestLogin.getUsername());
         return jwtUtil.generateToken(userDetails);
     }
 }
