@@ -4,7 +4,6 @@ import static com.uniparthenope.innervision.common.DefaultStrings.*;
 
 import com.uniparthenope.innervision.common.RequestLogin;
 import com.uniparthenope.innervision.dto.UtenteDto;
-import com.uniparthenope.innervision.dto.diz.DizCategoriaDto;
 import com.uniparthenope.innervision.entity.Utente;
 import com.uniparthenope.innervision.service.UtenteService;
 import io.swagger.annotations.ApiOperation;

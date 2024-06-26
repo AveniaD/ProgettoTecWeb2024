@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Utente } from '../interfaces/utente';
 import { environment } from '../environment';
 import { Observable, map } from 'rxjs';
+import { RequestLogin } from '../interfaces/request-login';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,21 @@ export class GestioneUtenteService {
     );
   }
 
-  login(email: string, password: string) {
-    console.log(`Form per la login:
-      email: ${email}, password: ${password}`);
+  login(username: string, password: string) {
+    console.log(this.apiUrl + '/login');
+    let requestLogin = new RequestLogin(
+      username? username : '',
+      password? password : ''
+    );
+
+    return this.http.post<{Messaggio: string, Operazione: string, Dto: any}>(
+      this.apiUrl + '/login', requestLogin).pipe(map
+      (response => {
+        console.log('Messaggio:', response.Messaggio);
+        console.log('Operazione:', response.Operazione);
+        console.log('Risultato:', response.Dto);
+        return response.Dto;
+      })
+    );
   }
 }

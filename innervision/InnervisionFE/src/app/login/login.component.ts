@@ -29,6 +29,14 @@ export class LoginComponent {
     this.gestioneUtenteService.login(
       this.applyForm.value.email ?? '',
       this.applyForm.value.password ?? ''
+    ).subscribe(
+      (response: any) => {
+        console.log('Login avvenuta con successo!', response);
+        this.router.navigate(['/welcome']);
+      },
+      error => {
+        console.error('Errore durante la login', error);
+      }
     );
   }
 }

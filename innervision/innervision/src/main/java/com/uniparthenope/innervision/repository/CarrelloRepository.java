@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CarrelloRepository extends JpaRepository<Carrello, Long> {
+    Carrello getCarrelloByIdCarrello(Long idCarrello);
 }

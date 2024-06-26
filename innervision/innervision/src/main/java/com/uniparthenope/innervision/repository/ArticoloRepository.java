@@ -13,4 +13,6 @@ public interface ArticoloRepository extends JpaRepository<Articolo, Long> {
 
     @Query(value = "SELECT * FROM Articolo WHERE nome LIKE %:nome%",nativeQuery = true)
     List<Articolo> findArticoloByNome(@Param("nome") String nome);
+
+    Articolo getArticoloByIdArticolo(Long idArticolo);
 }

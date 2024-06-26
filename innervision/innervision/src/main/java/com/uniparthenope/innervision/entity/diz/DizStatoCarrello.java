@@ -9,7 +9,7 @@ public class DizStatoCarrello {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_STATO_CARRELLO", nullable = false)
-    private Long idMarchio;
+    private Long idStatoCarrello;
 
     @Column(name = "DESC_STATO_CARRELLO", nullable = false)
     private String descStatoCarrello;
@@ -17,12 +17,12 @@ public class DizStatoCarrello {
     @Column(name = "ATTIVO", nullable = false, length = 1)
     private String attivo;
 
-    public Long getIdMarchio() {
-        return idMarchio;
+    public Long getIdStatoCarrello() {
+        return idStatoCarrello;
     }
 
-    public void setIdMarchio(Long idMarchio) {
-        this.idMarchio = idMarchio;
+    public void setIdStatoCarrello(Long idStatoCarrello) {
+        this.idStatoCarrello = idStatoCarrello;
     }
 
     public String getDescStatoCarrello() {
