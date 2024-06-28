@@ -97,7 +97,6 @@ public class CarrelloServiceImpl implements CarrelloService {
     @Override
     public Boolean cambiaStatoCarrello(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
-        //Utente utenteTrovato = utenteRepository.getUtenteByIdUtente(requestGestioneCarrelloInInput.getIdUtente());
 
         checkRequestCarrello(requestGestioneCarrelloInInput);
         if(requestGestioneCarrelloInInput.getIdStatoCarrello() >

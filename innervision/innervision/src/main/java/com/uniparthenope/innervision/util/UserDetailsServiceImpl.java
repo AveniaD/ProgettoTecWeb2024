@@ -24,6 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (utenteTrovato == null) {
             throw new UsernameNotFoundException("Utente non trovato: " + username);
         }
-        return new UserDetailsImpl(utenteTrovato, utenteMapper);
+        return new UserDetailsImpl(utenteTrovato, utenteMapper, utenteTrovato.getTipologiaUtente());
     }
 }

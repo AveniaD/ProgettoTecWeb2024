@@ -21,13 +21,13 @@ export class LoginComponent {
   ){}
 
   applyForm = new FormGroup({
-    email: new FormControl(''),
+    username: new FormControl(''),
     password: new FormControl('')
   });
 
   submitLogin() {
     this.gestioneUtenteService.login(
-      this.applyForm.value.email ?? '',
+      this.applyForm.value.username ?? '',
       this.applyForm.value.password ?? ''
     ).subscribe(
       (response: any) => {
