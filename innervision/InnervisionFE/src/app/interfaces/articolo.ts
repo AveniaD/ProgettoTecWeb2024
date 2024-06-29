@@ -7,6 +7,7 @@ export class Articolo {
   idArticolo!: number;
   nome!: string;
   foto!: string;
+  prezzo!: number;
   quantitaDisponibile!: number;
   descrizione!: string;
   marchio!: DizMarchio;
