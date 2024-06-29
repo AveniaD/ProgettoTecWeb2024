@@ -37,10 +37,10 @@ public class GestioneCarrelloController {
         try {
             LOGGER.info("Chiamata REST /addArticolo");
 
-            Boolean confermaAggiunta = carrelloService.addArticolo(requestGestioneCarrelloInInput);
+            CarrelloDto carrelloDto = carrelloService.addArticolo(requestGestioneCarrelloInInput);
 
             Map<String, Object> result = new HashMap<>();
-            result.put(DTO, confermaAggiunta);
+            result.put(DTO, carrelloDto);
             result.put(MESSAGGIO, "Articolo aggiunto con successo");
             result.put(OPERAZIONE, "Aggiungi articolo");
 
@@ -54,7 +54,7 @@ public class GestioneCarrelloController {
         }
     }
 
-    @DeleteMapping(value = "/removeArticolo", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/removeArticolo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
             notes = "Restituisce la conferma di aggiunta",
             response = UtenteDto.class)
@@ -62,10 +62,10 @@ public class GestioneCarrelloController {
         try {
             LOGGER.info("Chiamata REST /removeArticolo");
 
-            Boolean confermaRimozione = carrelloService.removeArticolo(requestGestioneCarrelloInInput);
+            CarrelloDto carrelloDto = carrelloService.removeArticolo(requestGestioneCarrelloInInput);
 
             Map<String, Object> result = new HashMap<>();
-            result.put(DTO, confermaRimozione);
+            result.put(DTO, carrelloDto);
             result.put(MESSAGGIO, "Articolo rimosso con successo");
             result.put(OPERAZIONE, "Rimozione articolo");
 
@@ -112,10 +112,10 @@ public class GestioneCarrelloController {
         try {
             LOGGER.info("Chiamata REST /deleteAllFromCart");
 
-            Boolean confermaRimozioneCompleta = carrelloService.svuotaCarrello(requestGestioneCarrelloInInput);
+            CarrelloDto carrelloDto = carrelloService.svuotaCarrello(requestGestioneCarrelloInInput);
 
             Map<String, Object> result = new HashMap<>();
-            result.put(DTO, confermaRimozioneCompleta);
+            result.put(DTO, carrelloDto);
             result.put(MESSAGGIO, "Tutti gli articoli del carrello rimossi con successo");
             result.put(OPERAZIONE, "Svuota carrello");
 

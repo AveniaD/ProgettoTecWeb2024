@@ -17,6 +17,15 @@ public class DizStatoCarrello {
     @Column(name = "ATTIVO", nullable = false, length = 1)
     private String attivo;
 
+    public DizStatoCarrello() {
+    }
+
+    public DizStatoCarrello(Long idStatoCarrello, String descStatoCarrello, String attivo) {
+        this.idStatoCarrello = idStatoCarrello;
+        this.descStatoCarrello = descStatoCarrello;
+        this.attivo = attivo;
+    }
+
     public Long getIdStatoCarrello() {
         return idStatoCarrello;
     }

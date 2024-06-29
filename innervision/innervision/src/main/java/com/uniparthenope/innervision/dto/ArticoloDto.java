@@ -18,6 +18,8 @@ public class ArticoloDto {
 
     private String foto;
 
+    private Double prezzo;
+
     private String descrizione;
 
     private Integer quantitaDisponibile;
@@ -35,7 +37,7 @@ public class ArticoloDto {
     public ArticoloDto() {
     }
 
-    public ArticoloDto(Long idArticolo, String nome, Integer recensioni, String foto,
+    public ArticoloDto(Long idArticolo, String nome, Integer recensioni, String foto, Double prezzo,
                        String descrizione, Integer quantitaDisponibile,
                        DizMarchio marchio, DizGenere genere, DizColore coloreMontatura,
                        DizColore coloreLente, DizCategoria categoria) {
@@ -43,6 +45,7 @@ public class ArticoloDto {
         this.nome = nome;
         this.recensioni = recensioni;
         this.foto = foto;
+        this.prezzo = prezzo;
         this.descrizione = descrizione;
         this.quantitaDisponibile = quantitaDisponibile;
         this.marchio = marchio;
@@ -82,6 +85,14 @@ public class ArticoloDto {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public Double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(Double prezzo) {
+        this.prezzo = prezzo;
     }
 
     public String getDescrizione() {

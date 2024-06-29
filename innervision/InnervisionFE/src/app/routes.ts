@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BrandComponent } from './brand/brand.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { CarrelloComponent } from './carrello/carrello.component';
 
 const routeConfig: Routes = [
   {
@@ -39,6 +40,11 @@ const routeConfig: Routes = [
     path: 'login',
     component: LoginComponent,
     title: 'Login'
+  },
+  {
+    path: 'showCart',
+    component: CarrelloComponent,
+    title: 'Carrello'
   },
   {
     path: 'welcome',

@@ -1,7 +1,11 @@
 package com.uniparthenope.innervision.service.impl;
 
 import com.uniparthenope.innervision.common.RequestLogin;
+import com.uniparthenope.innervision.entity.Articolo;
+import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.Utente;
+import com.uniparthenope.innervision.entity.diz.DizStatoCarrello;
+import com.uniparthenope.innervision.repository.CarrelloRepository;
 import com.uniparthenope.innervision.repository.UtenteRepository;
 import com.uniparthenope.innervision.service.UtenteService;
 import com.uniparthenope.innervision.util.JwtUtil;
@@ -12,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
@@ -30,6 +36,8 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private CarrelloRepository carrelloRepository;
 
     public Long registrazione(Utente utente) {
         if (utenteRepository.existsByUsername(utente.getUsername())) {
@@ -40,7 +48,15 @@ public class UtenteServiceImpl implements UtenteService {
         }
 
         utente.setPassword(passwordEncoder.encode(utente.getPassword()));
-        return utenteRepository.save(utente).getIdUtente();
+        Long idUtenteSalvato = utenteRepository.save(utente).getIdUtente();
+
+        DizStatoCarrello statoCarrelloIniziale = new DizStatoCarrello(1L, "Bozza","S");
+        Long idCarrello = carrelloRepository.save(new Carrello(null, new ArrayList<>(), statoCarrelloIniziale)).getIdCarrello();
+        utente.setCarrelloUtente(carrelloRepository.getCarrelloByIdCarrello(idCarrello));
+
+        utenteRepository.save(utente);
+
+        return idUtenteSalvato;
     }
 
     @Override

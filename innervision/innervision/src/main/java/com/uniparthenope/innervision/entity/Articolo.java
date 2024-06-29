@@ -25,6 +25,9 @@ public class Articolo {
     //Aggiungere da quante persone è stato salvato per supportare il sistema
     //di raccomandazioni?
 
+    @Column(name="PREZZO", nullable = false)
+    private Double prezzo;
+
     @Column(name ="FOTO")
     private String foto;
 
@@ -57,7 +60,7 @@ public class Articolo {
     public Articolo() {
     }
 
-    public Articolo(Long idArticolo, String nome, Integer recensioni, String foto,
+    public Articolo(Long idArticolo, String nome, Integer recensioni, String foto, Double prezzo,
                     String descrizione, Integer quantitaDisponibile,
                     DizMarchio marchio, DizGenere genere, DizColore coloreMontatura,
                     DizColore coloreLente, DizCategoria categoria) {
@@ -65,6 +68,7 @@ public class Articolo {
         this.nome = nome;
         this.recensioni = recensioni;
         this.foto = foto;
+        this.prezzo = prezzo;
         this.descrizione = descrizione;
         this.quantitaDisponibile = quantitaDisponibile;
         this.marchio = marchio;
@@ -104,6 +108,14 @@ public class Articolo {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public Double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(Double prezzo) {
+        this.prezzo = prezzo;
     }
 
     public String getDescrizione() {

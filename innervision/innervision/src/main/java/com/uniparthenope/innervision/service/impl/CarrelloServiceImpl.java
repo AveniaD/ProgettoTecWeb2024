@@ -5,7 +5,6 @@ import com.uniparthenope.innervision.dto.CarrelloDto;
 import com.uniparthenope.innervision.entity.Articolo;
 import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.Utente;
-import com.uniparthenope.innervision.entity.diz.DizStatoCarrello;
 import com.uniparthenope.innervision.mapper.CarrelloMapper;
 import com.uniparthenope.innervision.repository.ArticoloRepository;
 import com.uniparthenope.innervision.repository.CarrelloRepository;
@@ -34,7 +33,7 @@ public class CarrelloServiceImpl implements CarrelloService {
     private CarrelloMapper carrelloMapper;
 
     @Override
-    public Boolean addArticolo(RequestGestioneCarrello requestGestioneCarrelloInInput) {
+    public CarrelloDto addArticolo(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Articolo articoloDaAggiungere = articoloRepository.getArticoloByIdArticolo(requestGestioneCarrelloInInput.getIdArticolo());
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
         Utente utenteTrovato = utenteRepository.getUtenteByIdUtente(requestGestioneCarrelloInInput.getIdUtente());
@@ -47,11 +46,11 @@ public class CarrelloServiceImpl implements CarrelloService {
         carrelloRepository.save(carrelloDaAggiornare);
         utenteRepository.save(utenteTrovato);
 
-        return true;
+        return carrelloMapper.entityToDto(carrelloRepository.getCarrelloByIdCarrello(carrelloDaAggiornare.getIdCarrello()));
     }
 
     @Override
-    public Boolean removeArticolo(RequestGestioneCarrello requestGestioneCarrelloInInput) {
+    public CarrelloDto removeArticolo(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Articolo articoloDaRimuovere = articoloRepository.getArticoloByIdArticolo(requestGestioneCarrelloInInput.getIdArticolo());
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
         Utente utenteTrovato = utenteRepository.getUtenteByIdUtente(requestGestioneCarrelloInInput.getIdUtente());
@@ -66,7 +65,7 @@ public class CarrelloServiceImpl implements CarrelloService {
 
         carrelloRepository.save(carrelloDaAggiornare);
         utenteRepository.save(utenteTrovato);
-        return true;
+        return carrelloMapper.entityToDto(carrelloRepository.getCarrelloByIdCarrello(carrelloDaAggiornare.getIdCarrello()));
     }
 
     @Override
@@ -77,13 +76,13 @@ public class CarrelloServiceImpl implements CarrelloService {
     }
 
     @Override
-    public Boolean svuotaCarrello(RequestGestioneCarrello requestGestioneCarrelloInInput) {
+    public CarrelloDto svuotaCarrello(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
         Utente utenteTrovato = utenteRepository.getUtenteByIdUtente(requestGestioneCarrelloInInput.getIdUtente());
 
         checkRequestCarrello(requestGestioneCarrelloInInput);
         if(carrelloDaAggiornare.getStatoCarrello().getIdStatoCarrello() > 1)
-            return false;
+            throw new RuntimeException("Il carrello non può essere svuotato, non è più in stato bozza");
 
         carrelloDaAggiornare.getArticoli().clear();
         utenteTrovato.setCarrelloUtente(carrelloDaAggiornare);
@@ -91,7 +90,7 @@ public class CarrelloServiceImpl implements CarrelloService {
         carrelloRepository.save(carrelloDaAggiornare);
         utenteRepository.save(utenteTrovato);
 
-        return true;
+        return carrelloMapper.entityToDto(carrelloRepository.getCarrelloByIdCarrello(carrelloDaAggiornare.getIdCarrello()));
     }
 
     @Override
