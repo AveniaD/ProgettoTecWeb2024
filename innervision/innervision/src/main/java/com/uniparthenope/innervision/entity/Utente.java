@@ -18,10 +18,10 @@ public class Utente {
     @Column(name = "cognome", nullable = false)
     private String cognome;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "USERNAME",nullable = false, unique = true)
     private String username;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)

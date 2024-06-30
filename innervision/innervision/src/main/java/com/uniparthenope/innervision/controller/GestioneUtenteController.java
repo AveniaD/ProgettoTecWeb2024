@@ -5,6 +5,7 @@ import static com.uniparthenope.innervision.common.DefaultStrings.*;
 import com.uniparthenope.innervision.common.RequestLogin;
 import com.uniparthenope.innervision.dto.UtenteDto;
 import com.uniparthenope.innervision.entity.Utente;
+import com.uniparthenope.innervision.service.CarrelloService;
 import com.uniparthenope.innervision.service.UtenteService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -26,6 +27,9 @@ public class GestioneUtenteController {
 
     @Autowired
     private UtenteService utenteService;
+
+    @Autowired
+    private CarrelloService carrelloService;
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Effettua la registrazione di un utente",
@@ -71,7 +75,9 @@ public class GestioneUtenteController {
             String tokenLogin = utenteService.login(requestLogin);
 
             Map<String, Object> result = new HashMap<>();
-            result.put(DTO, tokenLogin);
+            result.put(CARRELLO, carrelloService.getCarrelloByUsername(requestLogin.getUsername()));
+            result.put(UTENTE_LOGGATO, utenteService.getInfoUtente(requestLogin.getUsername()));
+            result.put(TOKEN, tokenLogin);
             result.put(MESSAGGIO, "Login avvenuta con successo");
             result.put(OPERAZIONE, "Login Utente");
 
@@ -82,7 +88,7 @@ public class GestioneUtenteController {
         } catch (Exception e) {
 
             Map<String, Object> result = new HashMap<>();
-            result.put(DTO, -1);
+            result.put(TOKEN, -1);
             result.put(MESSAGGIO, "Login fallito");
             result.put(OPERAZIONE, "Login Utente");
 

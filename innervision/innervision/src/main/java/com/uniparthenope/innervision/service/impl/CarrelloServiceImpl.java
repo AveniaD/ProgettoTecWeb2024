@@ -82,7 +82,7 @@ public class CarrelloServiceImpl implements CarrelloService {
 
         checkRequestCarrello(requestGestioneCarrelloInInput);
         if(carrelloDaAggiornare.getStatoCarrello().getIdStatoCarrello() > 1)
-            throw new RuntimeException("Il carrello non può essere svuotato, non è più in stato bozza");
+            throw new RuntimeException("Il carrello non può essere svuotato");
 
         carrelloDaAggiornare.getArticoli().clear();
         utenteTrovato.setCarrelloUtente(carrelloDaAggiornare);
@@ -107,6 +107,14 @@ public class CarrelloServiceImpl implements CarrelloService {
         carrelloRepository.save(carrelloDaAggiornare);
 
         return true;
+    }
+
+    @Override
+    public CarrelloDto getCarrelloByUsername(String username) {
+        Utente utenteTrovato = utenteRepository.getUtenteByUsername(username);
+
+        Carrello toDto = carrelloRepository.getCarrelloByIdCarrello(utenteTrovato.getCarrelloUtente().getIdCarrello());
+        return carrelloMapper.entityToDto(toDto);
     }
 
     private void checkRequestGestioneCarrello(RequestGestioneCarrello requestToCheck){

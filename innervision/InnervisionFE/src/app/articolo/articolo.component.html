@@ -4,4 +4,8 @@
   <p class="listing-location">{{articolo.nome}}</p>
   <p class="listing-location">Quantità disponibile: {{articolo.quantitaDisponibile}}</p>
   <p class="listing-location">Prezzo: {{articolo.prezzo}} €</p>
+  <div *ngIf="idCarrello && usernameLoggato">
+    <button class="btn btn-primary" (click)="aggiungiCarrello(
+      articolo.idArticolo, usernameLoggato, idCarrello)"></button>
+  </div>
 </section>

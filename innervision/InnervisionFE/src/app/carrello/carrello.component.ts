@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ArticoloComponent } from '../articolo/articolo.component';
+import { GestioneUtenteService } from '../services/gestione-utente.service';
 
 @Component({
   selector: 'app-carrello',
@@ -23,16 +24,23 @@ export class CarrelloComponent implements OnInit{
 
   carrello!: Carrello;
 
-  constructor(private gestioneCarrelloService: GestioneCarrelloService){}
+  constructor(private gestioneCarrelloService: GestioneCarrelloService,
+    private gestioneUtenteService: GestioneUtenteService){}
 
   ngOnInit(): void {
-    this.gestioneCarrelloService.showCarrello(this.carrello.idCarrello).subscribe(
-      (data: Carrello) => {
-        this.carrello = data;
-      },
-      error => {
-        console.error('Errore durante il recupero del carrello', error);
-      }
-    );
+    if(this.gestioneUtenteService.getIdCarrello()){
+      let idCarrelloAttuale = this.gestioneUtenteService.getIdCarrello()!;
+      this.gestioneCarrelloService.showCarrello(idCarrelloAttuale).subscribe(
+        (data: Carrello) => {
+          console.log(data);
+          this.carrello = data;
+        },
+        error => {
+          console.error('Errore durante il recupero del carrello', error);
+        }
+      );
+    }else{
+      this.carrello = new Carrello();
+    }
   }
 }

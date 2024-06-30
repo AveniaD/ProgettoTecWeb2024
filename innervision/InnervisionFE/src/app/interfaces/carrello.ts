@@ -7,5 +7,4 @@ export class Carrello {
   articoli! : Articolo[];
   statoCarrello! : DizStatoCarrello;
 
-
 }

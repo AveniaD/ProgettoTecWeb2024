@@ -1,7 +1,7 @@
 package com.uniparthenope.innervision.service.impl;
 
+import com.uniparthenope.innervision.common.InfoUtente;
 import com.uniparthenope.innervision.common.RequestLogin;
-import com.uniparthenope.innervision.entity.Articolo;
 import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.Utente;
 import com.uniparthenope.innervision.entity.diz.DizStatoCarrello;
@@ -64,5 +64,10 @@ public class UtenteServiceImpl implements UtenteService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestLogin.getUsername(), requestLogin.getPassword()));
         final UserDetails userDetails = userDetailsService.loadUserByUsername(requestLogin.getUsername());
         return jwtUtil.generateToken(userDetails);
+    }
+
+    @Override
+    public UserDetails getInfoUtente(String username) {
+        return userDetailsService.loadUserByUsername(username);
     }
 }

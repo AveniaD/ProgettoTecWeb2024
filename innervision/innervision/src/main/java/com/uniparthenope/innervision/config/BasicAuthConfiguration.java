@@ -39,8 +39,10 @@ public class BasicAuthConfiguration {
                     .requestMatchers("/user/register","/user/login").permitAll()
                     .requestMatchers("/articoli/*").permitAll()
                     .requestMatchers("/dizionari/*").permitAll()
-                .anyRequest().authenticated()
-        ).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                    .requestMatchers("/carrello/*").authenticated()
+                    .anyRequest().permitAll()
+        ).sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
