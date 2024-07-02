@@ -6,14 +6,15 @@ import { Observable, map } from 'rxjs';
 import { RequestLogin } from '../interfaces/request-login';
 import { InfoUtente } from '../interfaces/info-utente';
 import { Carrello } from '../interfaces/carrello';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GestioneUtenteService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   readonly apiUrl = environment.apiUrl + '/user';
+  private loggedIn: boolean = false;
 
   register(utente: Utente): Observable<any> {
     console.log(this.apiUrl + '/register');
@@ -36,9 +37,7 @@ export class GestioneUtenteService {
     );
 
     return this.http.post<{Messaggio: string, Operazione: string,
-      Token: string,
-      UtenteLoggato: InfoUtente,
-      Carrello: Carrello}>(
+      Token: string, UtenteLoggato: InfoUtente, Carrello: Carrello}>(
       this.apiUrl + '/login', requestLogin).pipe(map
       (response => {
         console.log('Messaggio:', response.Messaggio);
@@ -47,6 +46,7 @@ export class GestioneUtenteService {
         console.log('UtenteLoggato:', response.UtenteLoggato);
         console.log('Carrello:', response.Carrello);
         if (response.Token) {
+          this.loggedIn = true;
           localStorage.setItem('jwtToken', response.Token);
           localStorage.setItem('usernameLoggato', response.UtenteLoggato.username);
           localStorage.setItem('idCarrello', response.Carrello.idCarrello.toString());
@@ -61,6 +61,10 @@ export class GestioneUtenteService {
   logout(): void {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('usernameLoggato');
+    localStorage.removeItem('idCarrello');
+
+    this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
 
   getToken(): string {
@@ -76,4 +80,7 @@ export class GestioneUtenteService {
     return Number(localStorage.getItem('idCarrello'));
   }
 
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
 }

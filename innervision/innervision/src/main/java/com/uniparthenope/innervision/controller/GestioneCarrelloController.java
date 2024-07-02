@@ -31,8 +31,7 @@ public class GestioneCarrelloController {
 
     @PostMapping(value = "/addArticolo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
-            notes = "Restituisce la conferma di aggiunta",
-            response = UtenteDto.class)
+            notes = "Restituisce la conferma di aggiunta")
     public ResponseEntity<Map<String, Object>> addArticolo(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
         try {
             LOGGER.info("Chiamata REST /addArticolo");
@@ -56,8 +55,7 @@ public class GestioneCarrelloController {
 
     @PostMapping(value = "/removeArticolo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
-            notes = "Restituisce la conferma di aggiunta",
-            response = UtenteDto.class)
+            notes = "Restituisce la conferma di aggiunta")
     public ResponseEntity<Map<String, Object>> removeArticolo(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
         try {
             LOGGER.info("Chiamata REST /removeArticolo");
@@ -81,8 +79,7 @@ public class GestioneCarrelloController {
 
     @PostMapping(value = "/showCart", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
-            notes = "Restituisce la conferma di aggiunta",
-            response = UtenteDto.class)
+            notes = "Restituisce la conferma di aggiunta")
     public ResponseEntity<Map<String, Object>> showCarrello(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
         try {
             LOGGER.info("Chiamata REST /showCarrello");
@@ -106,8 +103,7 @@ public class GestioneCarrelloController {
 
     @DeleteMapping(value = "/deleteAllFromCart", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
-            notes = "Restituisce la conferma di aggiunta",
-            response = UtenteDto.class)
+            notes = "Restituisce la conferma di aggiunta")
     public ResponseEntity<Map<String, Object>> svuotaCarrello(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
         try {
             LOGGER.info("Chiamata REST /deleteAllFromCart");
@@ -132,8 +128,7 @@ public class GestioneCarrelloController {
     //Cambia Stato Carrello
     @DeleteMapping(value = "/changeStateCart", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
-            notes = "Restituisce la conferma di aggiunta",
-            response = UtenteDto.class)
+            notes = "Restituisce la conferma di aggiunta")
     public ResponseEntity<Map<String, Object>> cambiaStatoCarrello(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
         try {
             LOGGER.info("Chiamata REST /changeStateCart");

@@ -6,6 +6,7 @@ import { GestioneDizionariService } from '../services/gestione-dizionari.service
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ArticoloComponent } from '../articolo/articolo.component';
+import { GestioneUtenteService } from '../services/gestione-utente.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +26,9 @@ export class NavbarComponent {
   categorieDisponibili!: DizCategoria[];
   marcheDisponibili!: DizMarchio[];
 
-  constructor(private gestioneDizionariService: GestioneDizionariService) {}
+  constructor(private gestioneDizionariService: GestioneDizionariService,
+    private gestioneUtenteService: GestioneUtenteService
+  ) {}
 
   ngOnInit(): void {
     this.gestioneDizionariService.getCategoria().subscribe(
@@ -55,5 +58,13 @@ export class NavbarComponent {
 
   onMouseLeave(): void {
     this.showDropdown = false;
+  }
+
+  logout() {
+    this.gestioneUtenteService.logout();
+  }
+
+  isLoggedIn(): boolean {
+    return this.gestioneUtenteService.isLoggedIn();
   }
 }

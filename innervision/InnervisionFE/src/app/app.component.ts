@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     HttpClientModule
   ],
+  providers: [],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

@@ -81,6 +81,7 @@ public class GestioneUtenteController {
             result.put(MESSAGGIO, "Login avvenuta con successo");
             result.put(OPERAZIONE, "Login Utente");
 
+            LOGGER.info("Token inviato: " + tokenLogin);
             LOGGER.info("Fine chiamata Rest /Login");
 
             return ResponseEntity.ok().body(result);

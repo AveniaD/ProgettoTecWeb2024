@@ -37,8 +37,15 @@
           Cart
         </a>
       </li>
-      <li><a class="button" [routerLink]="['/login']">Login</a></li>
-      <li><a class="button" [routerLink]="['/register']">Registrati</a></li>
+      <li *ngIf="!isLoggedIn()">
+        <a class="button" [routerLink]="['/login']">Login</a>
+      </li>
+      <li *ngIf="isLoggedIn()">
+        <a class="button" (click)="logout()">Logout</a>
+      </li>
+      <li *ngIf="!isLoggedIn()">
+        <a class="button" [routerLink]="['/register']">Registrati</a>
+      </li>
     </ul>
   </div>
 </nav>
