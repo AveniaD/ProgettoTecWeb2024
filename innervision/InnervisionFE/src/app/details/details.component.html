@@ -12,4 +12,8 @@
       <li>Prezzo: {{articolo.prezzo}} €</li>
     </ul>
   </section>
+  <div *ngIf="idCarrello && usernameLoggato">
+    <button class="btn btn-primary" (click)="aggiungiCarrello(
+      articolo.idArticolo, usernameLoggato, idCarrello)">Aggiungi al carrello</button>
+  </div>
 </article>

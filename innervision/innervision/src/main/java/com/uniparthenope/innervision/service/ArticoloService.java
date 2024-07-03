@@ -10,4 +10,8 @@ public interface ArticoloService {
     ArticoloDto findArticoloById(Long idArticolo);
 
     List<ArticoloDto> findArticoloByNome(String nome);
+
+    List<ArticoloDto> findArticoliByCategoria(Long idCategoria);
+
+    List<ArticoloDto> findArticoliByMarca(Long idMarca);
 }

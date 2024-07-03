@@ -1,6 +1,8 @@
 package com.uniparthenope.innervision.repository;
 
 import com.uniparthenope.innervision.entity.Articolo;
+import com.uniparthenope.innervision.entity.diz.DizCategoria;
+import com.uniparthenope.innervision.entity.diz.DizMarchio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +17,12 @@ public interface ArticoloRepository extends JpaRepository<Articolo, Long> {
     List<Articolo> findArticoloByNome(@Param("nome") String nome);
 
     Articolo getArticoloByIdArticolo(Long idArticolo);
+
+    @Query(value = "SELECT * FROM Articolo a WHERE a.id_diz_categoria = :idCategoria",
+            nativeQuery = true)
+    List<Articolo> findArticoliByCategoria(Long idCategoria);
+
+    @Query(value = "SELECT * FROM Articolo WHERE a.id_diz_marchio = :idMarchio",
+            nativeQuery = true)
+    List<Articolo> findArticoliByMarchio(Long idMarchio);
 }

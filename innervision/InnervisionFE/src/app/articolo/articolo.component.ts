@@ -30,7 +30,7 @@ export class ArticoloComponent {
   aggiungiCarrello(idArticolo: number, usernameLoggato: string, idCarrello: number) {
     this.gestioneCarrelloService.addArticolo(
       idArticolo,
-      usernameLoggato!,
+      usernameLoggato,
       idCarrello
     )
   }

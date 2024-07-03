@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { Articolo } from '../interfaces/articolo';
 import { GestioneArticoliService } from '../services/gestione-articoli.service';
 import { HttpClient } from '@angular/common/http';
+import { GestioneCarrelloService } from '../services/gestione-carrello.service';
+import { GestioneUtenteService } from '../services/gestione-utente.service';
 
 
 @Component({
@@ -21,10 +23,23 @@ import { HttpClient } from '@angular/common/http';
 export class DetailsComponent {
 
   gestioneArticoliService: GestioneArticoliService = new GestioneArticoliService(
-    inject(HttpClient)
+    inject(HttpClient));
+
+  gestioneCarrelloService: GestioneCarrelloService = new GestioneCarrelloService(
+    inject(HttpClient),
+    inject(GestioneUtenteService)
   );
+
+  gestioneUtenteService: GestioneUtenteService = new GestioneUtenteService(
+    inject(HttpClient),
+    inject(Router)
+  );
+
   articolo!: Articolo;
   route: ActivatedRoute = inject(ActivatedRoute);
+
+  idCarrello = this.gestioneUtenteService.getIdCarrello();
+  usernameLoggato = this.gestioneUtenteService.getUsername();
 
   constructor() {
     const idArticolo = parseInt(this.route.snapshot.params['id']);
@@ -38,4 +53,11 @@ export class DetailsComponent {
     );
   }
 
+  aggiungiCarrello(idArticolo: number, usernameLoggato: string, idCarrello: number) {
+    this.gestioneCarrelloService.addArticolo(
+      idArticolo,
+      usernameLoggato,
+      idCarrello
+    )
+  }
 }

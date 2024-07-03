@@ -2,8 +2,12 @@ package com.uniparthenope.innervision.service.impl;
 
 import com.uniparthenope.innervision.dto.ArticoloDto;
 import com.uniparthenope.innervision.entity.Articolo;
+import com.uniparthenope.innervision.entity.diz.DizCategoria;
+import com.uniparthenope.innervision.entity.diz.DizMarchio;
 import com.uniparthenope.innervision.mapper.ArticoloMapper;
 import com.uniparthenope.innervision.repository.ArticoloRepository;
+import com.uniparthenope.innervision.repository.diz.DizCategoriaRepository;
+import com.uniparthenope.innervision.repository.diz.DizMarchioRepository;
 import com.uniparthenope.innervision.service.ArticoloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +38,15 @@ public class ArticoloServiceImpl implements ArticoloService {
     @Override
     public List<ArticoloDto> findArticoloByNome(String nome) {
         return articoloMapper.toDtoList(articoloRepository.findArticoloByNome(nome));
+    }
+
+    @Override
+    public List<ArticoloDto> findArticoliByCategoria(Long idCategoria) {
+        return articoloMapper.toDtoList(articoloRepository.findArticoliByCategoria(idCategoria));
+    }
+
+    @Override
+    public List<ArticoloDto> findArticoliByMarca(Long idMarca) {
+        return articoloMapper.toDtoList(articoloRepository.findArticoliByMarchio(idMarca));
     }
 }
