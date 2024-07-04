@@ -1,7 +1,6 @@
 .listing {
   background: var(--accent-color);
   border-radius: 30px;
-  padding-bottom: 30px;
 }
 .listing-heading {
   color: var(--primary-color);

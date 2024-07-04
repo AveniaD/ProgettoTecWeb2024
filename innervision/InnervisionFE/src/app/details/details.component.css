@@ -67,6 +67,19 @@ a {
   text-decoration: none;
 }
 
+.listing-button{
+  margin: 10px 20px 20px 20px;
+}
+
+button {
+  padding: 5px 10px;
+  border: solid 1px var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+}
+
+
 a:link, a:visited, a:hover, a:active {
   text-decoration: none;
 }

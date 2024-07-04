@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { BrandComponent } from './brand/brand.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CarrelloComponent } from './carrello/carrello.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 const routeConfig: Routes = [
   {
@@ -22,9 +23,14 @@ const routeConfig: Routes = [
     title: 'Dettagli articolo'
   },
   {
-    path: 'brand',
+    path: 'brand/:id',
     component: BrandComponent,
-    title: 'Ricerca per Brand'
+    title: 'Ricerca per Marchi'
+  },
+  {
+    path: 'categories/:id',
+    component: CategoriesComponent,
+    title: 'Ricerca per Categorie'
   },
   {
     path: 'services',

@@ -27,13 +27,11 @@ export class DetailsComponent {
 
   gestioneCarrelloService: GestioneCarrelloService = new GestioneCarrelloService(
     inject(HttpClient),
-    inject(GestioneUtenteService)
-  );
+    inject(GestioneUtenteService));
 
   gestioneUtenteService: GestioneUtenteService = new GestioneUtenteService(
     inject(HttpClient),
-    inject(Router)
-  );
+    inject(Router));
 
   articolo!: Articolo;
   route: ActivatedRoute = inject(ActivatedRoute);
