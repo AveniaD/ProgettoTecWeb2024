@@ -51,4 +51,28 @@ export class GestioneArticoliService {
     );
   }
 
+  getArticoliByMarca(idMarca: Number): Observable<Articolo[]>{
+    console.log(this.apiUrl + '/getArticoliByMarca?idMarca=' + idMarca);
+    return this.http.get<{Messaggio: string, Operazione: string, Dto: Articolo[]}>(
+      this.apiUrl + '/getArticoliByMarca?idMarca='+ idMarca).pipe(map(response => {
+        console.log('Messaggio:', response.Messaggio);
+        console.log('Operazione:', response.Operazione);
+        console.log('Risultato:', response.Dto);
+        return response.Dto;
+      })
+    );
+  }
+
+  getArticoliByCategoria(idCategoria: Number): Observable<Articolo[]>{
+    console.log(this.apiUrl + '/getArticoliByCategoria?idCategoria=' + idCategoria);
+    return this.http.get<{Messaggio: string, Operazione: string, Dto: Articolo[]}>(
+      this.apiUrl + '/getArticoliByCategoria?idCategoria='+ idCategoria).pipe(map(response => {
+        console.log('Messaggio:', response.Messaggio);
+        console.log('Operazione:', response.Operazione);
+        console.log('Risultato:', response.Dto);
+        return response.Dto;
+      })
+    );
+  }
+
 }

@@ -13,9 +13,6 @@ public class ArticoloDto {
 
     private Integer recensioni;
 
-    //Aggiungere da quante persone è stato salvato per supportare il sistema
-    //di raccomandazioni?
-
     private String foto;
 
     private Double prezzo;

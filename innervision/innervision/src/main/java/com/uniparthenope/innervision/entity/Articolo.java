@@ -22,9 +22,6 @@ public class Articolo {
     @Column(name ="RECENSIONI", length = 1)
     private Integer recensioni;
 
-    //Aggiungere da quante persone è stato salvato per supportare il sistema
-    //di raccomandazioni?
-
     @Column(name="PREZZO", nullable = false)
     private Double prezzo;
 

@@ -1,1 +1,16 @@
-<p>brand works!</p>
+<div class="articles-container">
+  <h1>Articoli per Marca</h1>
+  <div *ngIf="articoli && articoli.length > 0;
+    else emptySearch">
+    <a *ngFor= "let articolo of articoli"
+        [routerLink]="['/details', articolo.idArticolo]">
+      <app-articolo [articolo] = "articolo"></app-articolo>
+    </a>
+  </div>
+</div>
+
+<ng-template #emptySearch>
+  <br>
+  <p>Non ci sono articoli inerenti a questa categoria,
+  <a [routerLink]="['/']">torna nella home</a></p>
+</ng-template>

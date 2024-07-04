@@ -18,11 +18,11 @@ public interface ArticoloRepository extends JpaRepository<Articolo, Long> {
 
     Articolo getArticoloByIdArticolo(Long idArticolo);
 
-    @Query(value = "SELECT * FROM Articolo a WHERE a.id_diz_categoria = :idCategoria",
+    @Query(value = "SELECT * FROM Articolo a WHERE id_diz_categoria = :idCategoria",
             nativeQuery = true)
     List<Articolo> findArticoliByCategoria(Long idCategoria);
 
-    @Query(value = "SELECT * FROM Articolo WHERE a.id_diz_marchio = :idMarchio",
+    @Query(value = "SELECT * FROM Articolo WHERE id_diz_marchio = :idMarchio",
             nativeQuery = true)
     List<Articolo> findArticoliByMarchio(Long idMarchio);
 }

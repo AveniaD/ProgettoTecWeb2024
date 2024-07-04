@@ -2,6 +2,9 @@ package com.uniparthenope.innervision.entity;
 
 import com.uniparthenope.innervision.entity.diz.DizTipologiaUtente;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "Utente")
@@ -34,6 +37,9 @@ public class Utente {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_CARRELLO")
     private Carrello carrelloUtente;
+
+    @Transient
+    private ArrayList<Acquisto> acquistiEffettuati;
 
     public Utente() {
     }
