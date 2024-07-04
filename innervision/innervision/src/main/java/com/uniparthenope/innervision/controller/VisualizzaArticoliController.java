@@ -59,12 +59,12 @@ public class VisualizzaArticoliController {
         try{
             LOGGER.info("Chiamata REST /getReccomendArticoli");
 
-            List<ArticoloDto> dto = articoloService.findAllArticoli();
+            List<ArticoloDto> dto = articoloService.findArticoliByReccomend(idUtente);
 
             Map<String, Object> result = new HashMap<>();
             result.put(DTO, dto);
-            result.put(MESSAGGIO, "Lista degli articoli");
-            result.put(OPERAZIONE, "Info Articoli");
+            result.put(MESSAGGIO, "Lista degli articoli raccomandati");
+            result.put(OPERAZIONE, "Info Articoli raccomandati");
 
             LOGGER.info("Fine chiamata Rest /getReccomendArticoli");
 
