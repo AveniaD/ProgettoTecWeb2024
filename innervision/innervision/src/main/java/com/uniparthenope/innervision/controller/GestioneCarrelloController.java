@@ -2,7 +2,6 @@ package com.uniparthenope.innervision.controller;
 
 import com.uniparthenope.innervision.common.RequestGestioneCarrello;
 import com.uniparthenope.innervision.dto.CarrelloDto;
-import com.uniparthenope.innervision.dto.UtenteDto;
 import com.uniparthenope.innervision.service.CarrelloService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -125,22 +124,21 @@ public class GestioneCarrelloController {
         }
     }
 
-    //Cambia Stato Carrello
-    @DeleteMapping(value = "/changeStateCart", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/acquistaArticoli", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
             notes = "Restituisce la conferma di aggiunta")
-    public ResponseEntity<Map<String, Object>> cambiaStatoCarrello(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
+    public ResponseEntity<Map<String, Object>> acquistaArticoli(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
         try {
-            LOGGER.info("Chiamata REST /changeStateCart");
+            LOGGER.info("Chiamata REST /acquistaArticoli");
 
-            Boolean confermaRimozioneCompleta = carrelloService.cambiaStatoCarrello(requestGestioneCarrelloInInput);
+            Boolean confermaRimozioneCompleta = carrelloService.acquistaArticoli(requestGestioneCarrelloInInput);
 
             Map<String, Object> result = new HashMap<>();
             result.put(DTO, confermaRimozioneCompleta);
-            result.put(MESSAGGIO, "Tutti gli articoli del carrello rimossi con successo");
-            result.put(OPERAZIONE, "Svuota carrello");
+            result.put(MESSAGGIO, "Acquisto degli articoli");
+            result.put(OPERAZIONE, "Acquisto Articoli");
 
-            LOGGER.info("Fine chiamata Rest /changeStateCart");
+            LOGGER.info("Fine chiamata Rest /acquistaArticoli");
 
             return ResponseEntity.ok().body(result);
 

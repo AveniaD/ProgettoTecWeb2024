@@ -1,7 +1,10 @@
 package com.uniparthenope.innervision.dto;
 
+import com.uniparthenope.innervision.entity.Acquisto;
 import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.diz.DizTipologiaUtente;
+
+import java.util.ArrayList;
 
 public class UtenteDto {
 
@@ -20,6 +23,8 @@ public class UtenteDto {
     private DizTipologiaUtente tipologiaUtente;
 
     private Carrello carrelloUtente;
+
+    private ArrayList<Acquisto> acquistiEffettuati;
 
     public UtenteDto() {
     }
@@ -97,5 +102,13 @@ public class UtenteDto {
 
     public void setCarrelloUtente(Carrello carrelloUtente) {
         this.carrelloUtente = carrelloUtente;
+    }
+
+    public ArrayList<Acquisto> getAcquistiEffettuati() {
+        return acquistiEffettuati;
+    }
+
+    public void setAcquistiEffettuati(ArrayList<Acquisto> acquistiEffettuati) {
+        this.acquistiEffettuati = acquistiEffettuati;
     }
 }

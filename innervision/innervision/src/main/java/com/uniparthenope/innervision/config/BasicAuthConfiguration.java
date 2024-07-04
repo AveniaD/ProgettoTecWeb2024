@@ -37,9 +37,14 @@ public class BasicAuthConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz) -> authz
                     .requestMatchers("/user/register","/user/login").permitAll()
-                    .requestMatchers("/articoli/*").permitAll()
+                    .requestMatchers("/articoli/getAllArticoli",
+                            "/articoli/getArticoloById",
+                            "/articoli/getArticoliByNome",
+                            "/articoli/getArticoliByCategoria",
+                            "/articoli/getArticoliByMarca").permitAll()
                     .requestMatchers("/dizionari/*").permitAll()
                     .requestMatchers("/carrello/*").authenticated()
+                    .requestMatchers("/articoli/getReccomendArticoli").authenticated()
                     .anyRequest().permitAll()
         ).sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

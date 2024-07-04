@@ -1,36 +1,29 @@
-package com.uniparthenope.innervision.entity;
+package com.uniparthenope.innervision.dto;
 
+import com.uniparthenope.innervision.entity.Articolo;
+import com.uniparthenope.innervision.entity.Utente;
 import com.uniparthenope.innervision.entity.diz.DizMarchio;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "ACQUISTO")
-public class Acquisto {
+public class AcquistoDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ID_ACQUISTO", nullable = false)
     private Long idAcquisto;
-    @ManyToOne
-    @JoinColumn(name = "ID_UTENTE")
+
     private Utente utente;
-    @ManyToOne
-    @JoinColumn(name = "ID_ARTICOLO")
+
     private Articolo articolo;
-    @ManyToOne
-    @JoinColumn(name = "ID_MARCHIO")
+
     private DizMarchio marchio;
 
-    public Acquisto(){}
+    public AcquistoDto(){}
 
-    public Acquisto(Long idAcquisto, Utente utente, Articolo articolo, DizMarchio marchio) {
+    public AcquistoDto(Long idAcquisto, Utente utente, Articolo articolo, DizMarchio marchio) {
         this.idAcquisto = idAcquisto;
         this.utente = utente;
         this.articolo = articolo;
         this.marchio = marchio;
     }
 
-    public Acquisto(Utente utente, Articolo articolo, DizMarchio marchio) {
+    public AcquistoDto(Utente utente, Articolo articolo, DizMarchio marchio) {
         this.utente = utente;
         this.articolo = articolo;
         this.marchio = marchio;

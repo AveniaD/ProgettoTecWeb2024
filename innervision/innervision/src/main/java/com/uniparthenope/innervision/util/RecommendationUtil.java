@@ -1,22 +1,23 @@
 package com.uniparthenope.innervision.util;
 
 import com.uniparthenope.innervision.entity.Acquisto;
+import com.uniparthenope.innervision.entity.Articolo;
 
 import java.util.*;
 
 public class RecommendationUtil {
 
-    public Map<Integer, List<String>> generateRecommendations(List<Acquisto> acquisti) {
-        // Preprocess the data
-        Map<Integer, Set<String>> userBrands = new HashMap<>();
+    public Map<Long, List<String>> generateRecommendations(List<Acquisto> acquisti) {
+
+        Map<Long, Set<String>> userBrands = new HashMap<>();
         for (Acquisto acquisto : acquisti) {
-            userBrands.computeIfAbsent(acquisto.getIdUtente(), k -> new HashSet<>()).add(acquisto.getMarchio());
+            userBrands.computeIfAbsent(acquisto.getUtente().getIdUtente(),
+                    k -> new HashSet<>()).add(acquisto.getMarchio().getDescMarchio());
         }
 
-        Map<Integer, List<String>> recommendations = new HashMap<>();
+        Map<Long, List<String>> recommendations = new HashMap<>();
 
-        // Generate recommendations for each user
-        for (Integer idUtente : userBrands.keySet()) {
+        for (Long idUtente : userBrands.keySet()) {
             List<String> recommendedBrands = recommendBrands(idUtente, userBrands);
             recommendations.put(idUtente, recommendedBrands);
         }
@@ -24,11 +25,11 @@ public class RecommendationUtil {
         return recommendations;
     }
 
-    public List<String> recommendBrands(Integer userId, Map<Integer, Set<String>> userBrands) {
+    public List<String> recommendBrands(Long userId, Map<Long, Set<String>> userBrands) {
         Set<String> purchasedBrands = userBrands.get(userId);
         Map<String, Integer> brandCount = new HashMap<>();
 
-        for (Map.Entry<Integer, Set<String>> entry : userBrands.entrySet()) {
+        for (Map.Entry<Long, Set<String>> entry : userBrands.entrySet()) {
             if (!entry.getKey().equals(userId)) {
                 for (String brand : entry.getValue()) {
                     if (!purchasedBrands.contains(brand)) {
@@ -38,7 +39,6 @@ public class RecommendationUtil {
             }
         }
 
-        // Sort the brands by count in descending order and return the top recommendations
         List<Map.Entry<String, Integer>> sortedBrands = new ArrayList<>(brandCount.entrySet());
         sortedBrands.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
@@ -48,5 +48,29 @@ public class RecommendationUtil {
         }
 
         return recommendations.size() > 2 ? recommendations.subList(0, 2) : recommendations;
+    }
+
+    public Map<Long, List<Articolo>> generateRecommendationsWithArticles(List<Acquisto> acquisti, List<Articolo> articoli) {
+        Map<Long, List<Articolo>> userRecommendedArticles = new HashMap<>();
+        Map<Long, List<String>> userBrandRecommendations = generateRecommendations(acquisti);
+
+        for (Long userId : userBrandRecommendations.keySet()) {
+            List<String> recommendedBrands = userBrandRecommendations.get(userId);
+            List<Articolo> recommendedArticles = new ArrayList<>();
+            List<Articolo> otherArticles = new ArrayList<>();
+
+            for (Articolo articolo : articoli) {
+                if (recommendedBrands.contains(articolo.getMarchio().getDescMarchio())) {
+                    recommendedArticles.add(articolo);
+                } else {
+                    otherArticles.add(articolo);
+                }
+            }
+
+            recommendedArticles.addAll(otherArticles);
+            userRecommendedArticles.put(userId, recommendedArticles);
+        }
+
+        return userRecommendedArticles;
     }
 }

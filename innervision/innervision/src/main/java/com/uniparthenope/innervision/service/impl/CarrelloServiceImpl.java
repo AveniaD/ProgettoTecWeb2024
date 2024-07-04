@@ -5,6 +5,7 @@ import com.uniparthenope.innervision.dto.CarrelloDto;
 import com.uniparthenope.innervision.entity.Articolo;
 import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.Utente;
+import com.uniparthenope.innervision.entity.diz.DizStatoCarrello;
 import com.uniparthenope.innervision.mapper.CarrelloMapper;
 import com.uniparthenope.innervision.repository.ArticoloRepository;
 import com.uniparthenope.innervision.repository.CarrelloRepository;
@@ -94,13 +95,11 @@ public class CarrelloServiceImpl implements CarrelloService {
     }
 
     @Override
-    public Boolean cambiaStatoCarrello(RequestGestioneCarrello requestGestioneCarrelloInInput) {
+    public Boolean acquistaArticoli(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
 
         checkRequestCarrello(requestGestioneCarrelloInInput);
-        if(requestGestioneCarrelloInInput.getIdStatoCarrello() >
-                carrelloDaAggiornare.getStatoCarrello().getIdStatoCarrello())
-            return false;
+        carrelloDaAggiornare.setStatoCarrello(dizStatoCarrelloRepository.getById(6L));
 
         carrelloDaAggiornare.setStatoCarrello(
                 dizStatoCarrelloRepository.getById(requestGestioneCarrelloInInput.getIdStatoCarrello()));

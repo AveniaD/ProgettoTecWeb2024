@@ -14,4 +14,6 @@ public interface ArticoloService {
     List<ArticoloDto> findArticoliByCategoria(Long idCategoria);
 
     List<ArticoloDto> findArticoliByMarca(Long idMarca);
+
+    List<ArticoloDto> findArticoliByReccomend(Long idUtente);
 }

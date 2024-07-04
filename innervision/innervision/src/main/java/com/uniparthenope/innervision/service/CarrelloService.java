@@ -12,7 +12,7 @@ public interface CarrelloService {
 
     CarrelloDto svuotaCarrello(RequestGestioneCarrello requestGestioneCarrelloInInput);
 
-    Boolean cambiaStatoCarrello(RequestGestioneCarrello requestGestioneCarrelloInInput);
+    Boolean acquistaArticoli(RequestGestioneCarrello requestGestioneCarrelloInInput);
 
     CarrelloDto getCarrelloByUsername(String username);
 }

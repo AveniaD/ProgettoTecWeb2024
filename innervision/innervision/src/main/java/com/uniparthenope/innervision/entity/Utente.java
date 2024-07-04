@@ -2,7 +2,6 @@ package com.uniparthenope.innervision.entity;
 
 import com.uniparthenope.innervision.entity.diz.DizTipologiaUtente;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,7 @@ public class Utente {
     @JoinColumn(name = "ID_CARRELLO")
     private Carrello carrelloUtente;
 
-    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
     private ArrayList<Acquisto> acquistiEffettuati;
 
     public Utente() {
@@ -117,5 +116,13 @@ public class Utente {
 
     public void setCarrelloUtente(Carrello carrelloUtente) {
         this.carrelloUtente = carrelloUtente;
+    }
+
+    public ArrayList<Acquisto> getAcquistiEffettuati() {
+        return acquistiEffettuati;
+    }
+
+    public void setAcquistiEffettuati(ArrayList<Acquisto> acquistiEffettuati) {
+        this.acquistiEffettuati = acquistiEffettuati;
     }
 }

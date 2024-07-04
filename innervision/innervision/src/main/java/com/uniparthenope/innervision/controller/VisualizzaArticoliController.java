@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -46,6 +43,30 @@ public class VisualizzaArticoliController {
             result.put(OPERAZIONE, "Info Articoli");
 
             LOGGER.info("Fine chiamata Rest /getAllArticoli");
+
+            return ResponseEntity.ok().body(result);
+        }catch (Exception e){
+            LOGGER.error(MESSAGGIO_ERRORE, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, MESSAGGIO_ERRORE, e);
+
+        }
+    }
+
+    @PostMapping(value = "/getReccomendArticoli", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ottieni tutti gli articoli",
+            notes = "Restituisce una lista di categorie disponibili.")
+    public ResponseEntity<Map<String, Object>> getReccomendArticoli(@RequestParam Long idUtente){
+        try{
+            LOGGER.info("Chiamata REST /getReccomendArticoli");
+
+            List<ArticoloDto> dto = articoloService.findAllArticoli();
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, dto);
+            result.put(MESSAGGIO, "Lista degli articoli");
+            result.put(OPERAZIONE, "Info Articoli");
+
+            LOGGER.info("Fine chiamata Rest /getReccomendArticoli");
 
             return ResponseEntity.ok().body(result);
         }catch (Exception e){
@@ -157,6 +178,4 @@ public class VisualizzaArticoliController {
 
         }
     }
-
-    //getArticoli per raccomandazione
 }
