@@ -3,7 +3,6 @@
   <div *ngIf="carrello && carrello.articoli && carrello.articoli.length > 0; else emptyCart">
     <div class="cart-items">
       <div class="cart-item" *ngFor= "let articolo of carrello.articoli">
-          <img src="#">
           <div class="item-details">
               <h2>{{articolo.nome}}</h2>
               <p>Categoria: {{articolo.categoria.descCategoria}}</p>
@@ -11,11 +10,12 @@
               <p>Colore lente: {{articolo.coloreLente.descColore}}</p>
               <p>Prezzo: {{articolo.prezzo}}</p>
           </div>
-          <button class="remove-btn">Rimuovi</button>
+          <button class="remove-btn" (click)="rimuoviCarrello(
+            articolo.idArticolo)">Rimuovi</button>
       </div>
     </div>
     <div class="cart-summary">
-        <button class="checkout-btn">Procedi al Pagamento</button>
+        <button class="checkout-btn">Acquista</button>
     </div>
   </div>
 </div>

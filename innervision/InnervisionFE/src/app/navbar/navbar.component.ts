@@ -40,7 +40,6 @@ export class NavbarComponent {
     this.gestioneDizionariService.getCategoria().subscribe(
       (data) => {
         this.categorieDisponibili = data;
-        this.showDropdown = true;
       },
       (error) => {
         console.error('Errore durante il recupero delle categorie', error);

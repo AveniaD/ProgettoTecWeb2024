@@ -26,13 +26,4 @@ export class ArticoloComponent {
   constructor(private gestioneUtenteService: GestioneUtenteService,
     private gestioneCarrelloService: GestioneCarrelloService
   ){}
-
-  aggiungiCarrello(idArticolo: number, usernameLoggato: string, idCarrello: number) {
-    this.gestioneCarrelloService.addArticolo(
-      idArticolo,
-      usernameLoggato,
-      idCarrello
-    )
-  }
-
 }

@@ -124,17 +124,17 @@ public class GestioneCarrelloController {
         }
     }
 
-    @DeleteMapping(value = "/acquistaArticoli", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/acquistaArticoli", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Aggiunge un articolo al carrello di uno specifico utente",
             notes = "Restituisce la conferma di aggiunta")
     public ResponseEntity<Map<String, Object>> acquistaArticoli(@RequestBody RequestGestioneCarrello requestGestioneCarrelloInInput) {
         try {
             LOGGER.info("Chiamata REST /acquistaArticoli");
 
-            Boolean confermaRimozioneCompleta = carrelloService.acquistaArticoli(requestGestioneCarrelloInInput);
+            Boolean confermaAcquisto = carrelloService.acquistaArticoli(requestGestioneCarrelloInInput);
 
             Map<String, Object> result = new HashMap<>();
-            result.put(DTO, confermaRimozioneCompleta);
+            result.put(DTO, confermaAcquisto);
             result.put(MESSAGGIO, "Acquisto degli articoli");
             result.put(OPERAZIONE, "Acquisto Articoli");
 

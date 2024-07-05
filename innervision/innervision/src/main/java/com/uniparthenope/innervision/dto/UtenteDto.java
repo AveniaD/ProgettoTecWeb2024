@@ -5,6 +5,7 @@ import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.diz.DizTipologiaUtente;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UtenteDto {
 
@@ -24,12 +25,14 @@ public class UtenteDto {
 
     private Carrello carrelloUtente;
 
-    private ArrayList<Acquisto> acquistiEffettuati;
+    private List<Acquisto> acquistiEffettuati;
 
     public UtenteDto() {
     }
 
-    public UtenteDto(Long idUtente, String nome, String cognome, String username, String email, String password, DizTipologiaUtente tipologiaUtente, Carrello carrelloUtente) {
+    public UtenteDto(Long idUtente, String nome, String cognome, String username,
+                     String email, String password, DizTipologiaUtente tipologiaUtente,
+                     Carrello carrelloUtente, ArrayList<Acquisto> acquistiEffettuati) {
         this.idUtente = idUtente;
         this.nome = nome;
         this.cognome = cognome;
@@ -38,6 +41,7 @@ public class UtenteDto {
         this.password = password;
         this.tipologiaUtente = tipologiaUtente;
         this.carrelloUtente = carrelloUtente;
+        this.acquistiEffettuati = acquistiEffettuati;
     }
 
     public Long getIdUtente() {
@@ -104,7 +108,7 @@ public class UtenteDto {
         this.carrelloUtente = carrelloUtente;
     }
 
-    public ArrayList<Acquisto> getAcquistiEffettuati() {
+    public List<Acquisto> getAcquistiEffettuati() {
         return acquistiEffettuati;
     }
 

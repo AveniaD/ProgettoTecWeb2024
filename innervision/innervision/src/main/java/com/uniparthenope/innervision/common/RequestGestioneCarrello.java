@@ -8,6 +8,8 @@ public class RequestGestioneCarrello {
 
     private Long idStatoCarrello;
 
+    private String username;
+
     public RequestGestioneCarrello() {
     }
 
@@ -33,5 +35,9 @@ public class RequestGestioneCarrello {
 
     public void setIdStatoCarrello(Long idStatoCarrello) {
         this.idStatoCarrello = idStatoCarrello;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

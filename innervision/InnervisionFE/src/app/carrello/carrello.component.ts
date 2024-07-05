@@ -27,6 +27,9 @@ export class CarrelloComponent implements OnInit{
   constructor(private gestioneCarrelloService: GestioneCarrelloService,
     private gestioneUtenteService: GestioneUtenteService){}
 
+  usernameLoggato = this.gestioneUtenteService.getUsername();
+  idCarrello = this.gestioneUtenteService.getIdCarrello();
+
   ngOnInit(): void {
     if(this.gestioneUtenteService.getIdCarrello()){
       let idCarrelloAttuale = this.gestioneUtenteService.getIdCarrello()!;
@@ -42,5 +45,31 @@ export class CarrelloComponent implements OnInit{
     }else{
       this.carrello = new Carrello();
     }
+  }
+
+  rimuoviCarrello(idArticolo: number) {
+    this.gestioneCarrelloService.removeArticolo(idArticolo, this.usernameLoggato, this.idCarrello)
+    .subscribe(
+      (carrello: Carrello) => {
+        console.log('Articolo rimosso dal carrello:', carrello);
+        this.aggiornaCarrello();
+      },
+      error => {
+        console.error('Errore durante l\'aggiunta dell\'articolo al carrello:', error);
+      }
+    );
+  }
+
+  aggiornaCarrello() {
+    this.gestioneCarrelloService.showCarrello(this.idCarrello)
+      .subscribe(
+        (carrello: Carrello) => {
+          this.carrello = carrello;
+          console.log('Dati carrello aggiornati:', carrello);
+        },
+        error => {
+          console.error('Errore durante l\'aggiornamento del carrello:', error);
+        }
+      );
   }
 }

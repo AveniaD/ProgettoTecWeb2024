@@ -2,11 +2,12 @@ package com.uniparthenope.innervision.service.impl;
 
 import com.uniparthenope.innervision.common.RequestGestioneCarrello;
 import com.uniparthenope.innervision.dto.CarrelloDto;
+import com.uniparthenope.innervision.entity.Acquisto;
 import com.uniparthenope.innervision.entity.Articolo;
 import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.Utente;
-import com.uniparthenope.innervision.entity.diz.DizStatoCarrello;
 import com.uniparthenope.innervision.mapper.CarrelloMapper;
+import com.uniparthenope.innervision.repository.AcquistoRepository;
 import com.uniparthenope.innervision.repository.ArticoloRepository;
 import com.uniparthenope.innervision.repository.CarrelloRepository;
 import com.uniparthenope.innervision.repository.UtenteRepository;
@@ -14,6 +15,8 @@ import com.uniparthenope.innervision.repository.diz.DizStatoCarrelloRepository;
 import com.uniparthenope.innervision.service.CarrelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class CarrelloServiceImpl implements CarrelloService {
@@ -32,14 +35,16 @@ public class CarrelloServiceImpl implements CarrelloService {
 
     @Autowired
     private CarrelloMapper carrelloMapper;
+    @Autowired
+    private AcquistoRepository acquistoRepository;
 
     @Override
     public CarrelloDto addArticolo(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Articolo articoloDaAggiungere = articoloRepository.getArticoloByIdArticolo(requestGestioneCarrelloInInput.getIdArticolo());
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
-        Utente utenteTrovato = utenteRepository.getUtenteByIdUtente(requestGestioneCarrelloInInput.getIdUtente());
+        Utente utenteTrovato = utenteRepository.getUtenteByUsername(requestGestioneCarrelloInInput.getUsername());
 
-        checkRequestGestioneCarrello(requestGestioneCarrelloInInput);
+        checkRequestGestioneCarrello(articoloDaAggiungere, carrelloDaAggiornare, utenteTrovato);
 
         carrelloDaAggiornare.getArticoli().add(articoloDaAggiungere);
         utenteTrovato.setCarrelloUtente(carrelloDaAggiornare);
@@ -54,9 +59,9 @@ public class CarrelloServiceImpl implements CarrelloService {
     public CarrelloDto removeArticolo(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Articolo articoloDaRimuovere = articoloRepository.getArticoloByIdArticolo(requestGestioneCarrelloInInput.getIdArticolo());
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
-        Utente utenteTrovato = utenteRepository.getUtenteByIdUtente(requestGestioneCarrelloInInput.getIdUtente());
+        Utente utenteTrovato = utenteRepository.getUtenteByUsername(requestGestioneCarrelloInInput.getUsername());
 
-        checkRequestGestioneCarrello(requestGestioneCarrelloInInput);
+        checkRequestGestioneCarrello(articoloDaRimuovere, carrelloDaAggiornare, utenteTrovato);
         if(carrelloDaAggiornare.getArticoli().isEmpty()){
             throw new RuntimeException("Il carrello trovato è già vuoto");
         }
@@ -81,7 +86,7 @@ public class CarrelloServiceImpl implements CarrelloService {
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
         Utente utenteTrovato = utenteRepository.getUtenteByIdUtente(requestGestioneCarrelloInInput.getIdUtente());
 
-        checkRequestCarrello(requestGestioneCarrelloInInput);
+        checkRequestCarrello(carrelloDaAggiornare, utenteTrovato);
         if(carrelloDaAggiornare.getStatoCarrello().getIdStatoCarrello() > 1)
             throw new RuntimeException("Il carrello non può essere svuotato");
 
@@ -97,14 +102,33 @@ public class CarrelloServiceImpl implements CarrelloService {
     @Override
     public Boolean acquistaArticoli(RequestGestioneCarrello requestGestioneCarrelloInInput) {
         Carrello carrelloDaAggiornare = carrelloRepository.getCarrelloByIdCarrello(requestGestioneCarrelloInInput.getIdCarrello());
+        Utente utenteTrovato = utenteRepository.getUtenteByUsername(requestGestioneCarrelloInInput.getUsername());
 
-        checkRequestCarrello(requestGestioneCarrelloInInput);
+        if(carrelloDaAggiornare == null){
+            throw new RuntimeException("Carrello non trovato");
+        }
         carrelloDaAggiornare.setStatoCarrello(dizStatoCarrelloRepository.getById(6L));
 
         carrelloDaAggiornare.setStatoCarrello(
                 dizStatoCarrelloRepository.getById(requestGestioneCarrelloInInput.getIdStatoCarrello()));
         carrelloRepository.save(carrelloDaAggiornare);
 
+        ArrayList<Acquisto> acquistiEffettuati = new ArrayList<>();
+        for (Articolo articolo:carrelloDaAggiornare.getArticoli()) {
+            Acquisto acquisto = new Acquisto();
+            acquisto.setArticolo(articolo);
+            acquisto.setUtente(utenteTrovato);
+            acquisto.setMarchio(articolo.getMarchio());
+
+            Acquisto acquistoSalvato = acquistoRepository.save(acquisto);
+
+            acquisto.setIdAcquisto(acquistoSalvato.getIdAcquisto());
+
+            acquistiEffettuati.add(acquisto);
+        }
+
+        utenteTrovato.setAcquistiEffettuati(acquistiEffettuati);
+        utenteRepository.save(utenteTrovato);
         return true;
     }
 
@@ -116,27 +140,27 @@ public class CarrelloServiceImpl implements CarrelloService {
         return carrelloMapper.entityToDto(toDto);
     }
 
-    private void checkRequestGestioneCarrello(RequestGestioneCarrello requestToCheck){
-        if(requestToCheck.getIdArticolo() == null){
+    private void checkRequestGestioneCarrello(Articolo articoloDaRimuovere, Carrello carrelloDaAggiornare, Utente utenteTrovato){
+        if(articoloDaRimuovere == null){
             throw new RuntimeException("Articolo non trovato");
         }
 
-        if(requestToCheck.getIdCarrello() == null){
+        if(carrelloDaAggiornare == null){
             throw new RuntimeException("Carrello non trovato");
         }
 
-        if(requestToCheck.getIdUtente() == null){
+        if(utenteTrovato == null){
             throw new RuntimeException("Utente non trovato");
         }
     }
 
 
-    private void checkRequestCarrello(RequestGestioneCarrello requestToCheck){
-        if(requestToCheck.getIdCarrello() == null){
+    private void checkRequestCarrello(Carrello carrelloDaAggiornare, Utente utenteTrovato){
+        if(carrelloDaAggiornare == null){
             throw new RuntimeException("Carrello non trovato");
         }
 
-        if(requestToCheck.getIdUtente() == null){
+        if(utenteTrovato == null){
             throw new RuntimeException("Utente non trovato");
         }
     }

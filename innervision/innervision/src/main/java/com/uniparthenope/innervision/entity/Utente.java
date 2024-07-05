@@ -4,6 +4,7 @@ import com.uniparthenope.innervision.entity.diz.DizTipologiaUtente;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Utente")
@@ -37,13 +38,17 @@ public class Utente {
     @JoinColumn(name = "ID_CARRELLO")
     private Carrello carrelloUtente;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private ArrayList<Acquisto> acquistiEffettuati;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Acquisto> acquistiEffettuati;
 
     public Utente() {
     }
 
-    public Utente(Long idUtente, String nome, String cognome, String username, String email, String password, DizTipologiaUtente tipologiaUtente, Carrello carrelloUtente) {
+    public Utente(Long idUtente, String nome, String cognome, String username,
+                  String email, String password,
+                  DizTipologiaUtente tipologiaUtente,
+                  Carrello carrelloUtente,
+                  ArrayList<Acquisto> acquistiEffettuati) {
         this.idUtente = idUtente;
         this.nome = nome;
         this.cognome = cognome;
@@ -52,6 +57,7 @@ public class Utente {
         this.password = password;
         this.tipologiaUtente = tipologiaUtente;
         this.carrelloUtente = carrelloUtente;
+        this.acquistiEffettuati = acquistiEffettuati;
     }
 
     public Long getIdUtente() {
@@ -118,7 +124,7 @@ public class Utente {
         this.carrelloUtente = carrelloUtente;
     }
 
-    public ArrayList<Acquisto> getAcquistiEffettuati() {
+    public List<Acquisto> getAcquistiEffettuati() {
         return acquistiEffettuati;
     }
 

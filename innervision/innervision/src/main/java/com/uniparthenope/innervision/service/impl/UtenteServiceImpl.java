@@ -9,6 +9,7 @@ import com.uniparthenope.innervision.repository.CarrelloRepository;
 import com.uniparthenope.innervision.repository.UtenteRepository;
 import com.uniparthenope.innervision.service.UtenteService;
 import com.uniparthenope.innervision.util.JwtUtil;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -61,7 +62,13 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     public String login(RequestLogin requestLogin) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestLogin.getUsername(), requestLogin.getPassword()));
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(
+                        requestLogin.getUsername(),
+                        requestLogin.getPassword());
+
+        authenticationManager.authenticate(authenticationToken);
+
         final UserDetails userDetails = userDetailsService.loadUserByUsername(requestLogin.getUsername());
         return jwtUtil.generateToken(userDetails);
     }

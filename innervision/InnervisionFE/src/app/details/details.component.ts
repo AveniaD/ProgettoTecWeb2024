@@ -8,6 +8,7 @@ import { GestioneArticoliService } from '../services/gestione-articoli.service';
 import { HttpClient } from '@angular/common/http';
 import { GestioneCarrelloService } from '../services/gestione-carrello.service';
 import { GestioneUtenteService } from '../services/gestione-utente.service';
+import { Carrello } from '../interfaces/carrello';
 
 
 @Component({
@@ -52,10 +53,14 @@ export class DetailsComponent {
   }
 
   aggiungiCarrello(idArticolo: number, usernameLoggato: string, idCarrello: number) {
-    this.gestioneCarrelloService.addArticolo(
-      idArticolo,
-      usernameLoggato,
-      idCarrello
-    )
+    this.gestioneCarrelloService.addArticolo(idArticolo, usernameLoggato, idCarrello)
+    .subscribe(
+      (carrello: Carrello) => {
+        console.log('Articolo aggiunto al carrello:', carrello);
+      },
+      error => {
+        console.error('Errore durante l\'aggiunta dell\'articolo al carrello:', error);
+      }
+    );
   }
 }

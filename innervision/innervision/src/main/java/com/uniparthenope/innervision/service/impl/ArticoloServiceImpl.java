@@ -63,6 +63,6 @@ public class ArticoloServiceImpl implements ArticoloService {
         Map<Long, List<Articolo>> recommendations =
                 new RecommendationUtil().generateRecommendationsWithArticles(
                         utenteTrovato.getAcquistiEffettuati(), articoloRepository.findAll());
-        return null;
+        return articoloMapper.toDtoList(recommendations.get(0L)); // TO DO
     }
 }

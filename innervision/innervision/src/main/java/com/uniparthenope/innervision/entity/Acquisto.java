@@ -8,16 +8,15 @@ import jakarta.persistence.*;
 public class Acquisto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ID_ACQUISTO", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAcquisto;
     @ManyToOne
     @JoinColumn(name = "ID_UTENTE")
     private Utente utente;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_ARTICOLO")
     private Articolo articolo;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_MARCHIO")
     private DizMarchio marchio;
 
@@ -25,12 +24,6 @@ public class Acquisto {
 
     public Acquisto(Long idAcquisto, Utente utente, Articolo articolo, DizMarchio marchio) {
         this.idAcquisto = idAcquisto;
-        this.utente = utente;
-        this.articolo = articolo;
-        this.marchio = marchio;
-    }
-
-    public Acquisto(Utente utente, Articolo articolo, DizMarchio marchio) {
         this.utente = utente;
         this.articolo = articolo;
         this.marchio = marchio;
