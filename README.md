@@ -73,7 +73,7 @@ innervision-app:
  environment:
    SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/progettotecweb
    SPRING_DATASOURCE_USERNAME: root
-   SPRING_DATASOURCE_PASSWORD: my-secret-pw
+   SPRING_DATASOURCE_PASSWORD: 
  depends_on:
    - mysql-db
  networks:
