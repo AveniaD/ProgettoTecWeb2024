@@ -6,6 +6,8 @@ import { Articolo } from '../interfaces/articolo';
 import { GestioneArticoliService } from '../services/gestione-articoli.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { GestioneUtenteService } from '../services/gestione-utente.service';
+import { Utente } from '../interfaces/utente';
 
 
 @Component({
@@ -25,18 +27,54 @@ export class HomeComponent implements OnInit {
 
   articoloList: Articolo[] = [];
   ricercaNome: string = ''
+  utente!: Utente;
 
-  constructor(private gestioneArticoliService: GestioneArticoliService) { }
+  constructor(private gestioneArticoliService: GestioneArticoliService,
+    private gestioneUtenteService: GestioneUtenteService
+  ) { }
 
   ngOnInit(): void {
-    this.gestioneArticoliService.getAllArticoli().subscribe(
-      (data: Articolo[]) => {
-        this.articoloList = data;
-      },
-      error => {
-        console.error('Errore durante il recupero degli articoli', error);
+    if(this.gestioneUtenteService.getUsername()){
+      this.gestioneUtenteService.getInfoUtente().subscribe(
+        (data: Utente) => {
+          this.utente = data;
+        },
+        error => {
+          console.error('Errore durante il recupero degli articoli', error);
+        }
+      )
+      if(this.utente.acquistiEffettuati
+        && this.utente.acquistiEffettuati.length > 0
+        && this.utente.idUtente
+      ){
+        this.gestioneArticoliService.getReccomendArticoli(this.utente.idUtente).subscribe(
+          (data: Articolo[]) => {
+            this.articoloList = data;
+          },
+          error => {
+            console.error('Errore durante il recupero degli articoli', error);
+          }
+        );
+      }else{
+        this.gestioneArticoliService.getAllArticoli().subscribe(
+          (data: Articolo[]) => {
+            this.articoloList = data;
+          },
+          error => {
+            console.error('Errore durante il recupero degli articoli', error);
+          }
+        );
       }
-    );
+    }else{
+      this.gestioneArticoliService.getAllArticoli().subscribe(
+        (data: Articolo[]) => {
+          this.articoloList = data;
+        },
+        error => {
+          console.error('Errore durante il recupero degli articoli', error);
+        }
+      );
+    }
   }
 
   ricercaPerNome(): void{

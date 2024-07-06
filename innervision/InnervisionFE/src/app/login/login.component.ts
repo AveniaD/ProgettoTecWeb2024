@@ -36,7 +36,6 @@ export class LoginComponent {
       },
       error => {
         console.error('Errore durante la login', error);
-        //this.router.navigate(['/welcome']);
       }
     );
   }

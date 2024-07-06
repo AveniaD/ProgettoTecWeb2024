@@ -75,4 +75,15 @@ export class GestioneArticoliService {
     );
   }
 
+  getReccomendArticoli(idUtente: number) {
+    console.log(this.apiUrl + '/getReccomendArticoli');
+    return this.http.post<{Messaggio: string, Operazione: string, Dto: Articolo[]}>(
+      this.apiUrl + '/getReccomendArticoli', idUtente).pipe(map(response => {
+        console.log('Messaggio:', response.Messaggio);
+        console.log('Operazione:', response.Operazione);
+        console.log('Risultato:', response.Dto);
+        return response.Dto;
+      })
+    );
+  }
 }

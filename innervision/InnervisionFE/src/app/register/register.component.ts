@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Utente } from '../interfaces/utente';
 import { Router, RouterModule } from '@angular/router';
 import { Carrello } from '../interfaces/carrello';
+import { Acquisto } from '../interfaces/acquisto';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +45,8 @@ export class RegisterComponent {
         this.applyForm.value.username? this.applyForm.value.username : '',
         this.applyForm.value.username? this.applyForm.value.username : '',
         this.applyForm.value.password? this.applyForm.value.password : '',
-        new Carrello()
+        new Carrello(),
+        []
       );
 
       this.gestioneUtenteService.register(utente).subscribe(

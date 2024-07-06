@@ -58,6 +58,18 @@ export class GestioneUtenteService {
     );
   }
 
+  getInfoUtente() {
+    return this.http.post<{Messaggio: string, Operazione: string, Dto: Utente}>(
+      this.apiUrl + '/getInfoUtente', this.getUsername).pipe(map
+      (response => {
+        console.log('Messaggio:', response.Messaggio);
+        console.log('Operazione:', response.Operazione);
+        console.log('Dto:', response.Dto);
+        return response.Dto;
+      })
+    );
+  }
+
   logout(): void {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('usernameLoggato');
