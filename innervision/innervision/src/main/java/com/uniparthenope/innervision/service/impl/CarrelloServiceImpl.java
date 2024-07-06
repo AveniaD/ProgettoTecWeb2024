@@ -108,9 +108,6 @@ public class CarrelloServiceImpl implements CarrelloService {
             throw new RuntimeException("Carrello non trovato");
         }
 
-        carrelloDaAggiornare.getArticoli().clear();
-        carrelloRepository.save(carrelloDaAggiornare);
-
         ArrayList<Acquisto> acquistiEffettuati = new ArrayList<>();
         for (Articolo articolo:carrelloDaAggiornare.getArticoli()) {
             Acquisto acquisto = new Acquisto();
@@ -125,6 +122,8 @@ public class CarrelloServiceImpl implements CarrelloService {
             acquistiEffettuati.add(acquisto);
         }
 
+        carrelloDaAggiornare.getArticoli().clear();
+        carrelloRepository.save(carrelloDaAggiornare);
         utenteTrovato.setAcquistiEffettuati(acquistiEffettuati);
         utenteRepository.save(utenteTrovato);
         return true;

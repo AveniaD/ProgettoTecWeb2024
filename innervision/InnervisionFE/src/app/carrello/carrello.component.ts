@@ -79,7 +79,7 @@ export class CarrelloComponent implements OnInit{
     .subscribe(
       (carrello: Carrello) => {
         console.log('Articolo rimosso dal carrello:', carrello);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       },
       error => {
         console.error('Errore durante l\'aggiunta dell\'articolo al carrello:', error);

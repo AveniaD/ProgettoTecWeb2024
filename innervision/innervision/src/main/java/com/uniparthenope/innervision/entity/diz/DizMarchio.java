@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "DIZ_MARCHIO")
 public class DizMarchio {
@@ -41,5 +43,20 @@ public class DizMarchio {
 
     public void setAttivo(String attivo) {
         this.attivo = attivo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        DizMarchio other = (DizMarchio) o;
+        return Objects.equals(idMarchio, other.idMarchio) && Objects.equals(descMarchio, other.descMarchio);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idMarchio, descMarchio);
     }
 }

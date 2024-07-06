@@ -106,16 +106,16 @@ public class GestioneUtenteController {
             response = UtenteDto.class)
     public ResponseEntity<Map<String, Object>> getInfoUtente(@RequestBody String usernameLoggato) {
         try {
-            LOGGER.info("Chiamata REST /login");
+            LOGGER.info("Chiamata REST /getInfoUtente");
 
             UtenteDto utenteDto = utenteService.getUtenteByUsername(usernameLoggato);
 
             Map<String, Object> result = new HashMap<>();
             result.put(DTO, utenteDto);
-            result.put(MESSAGGIO, "Login avvenuta con successo");
-            result.put(OPERAZIONE, "Login Utente");
+            result.put(MESSAGGIO, "Informazioni utente ottenute");
+            result.put(OPERAZIONE, "Info Utente");
 
-            LOGGER.info("Fine chiamata Rest /Login");
+            LOGGER.info("Fine chiamata Rest /getInfoUtente");
 
             return ResponseEntity.ok().body(result);
 

@@ -8,7 +8,7 @@
               <p>Categoria: {{articolo.categoria.descCategoria}}</p>
               <p>Colore montatura: {{articolo.coloreMontatura.descColore}}</p>
               <p>Colore lente: {{articolo.coloreLente.descColore}}</p>
-              <p>Prezzo: {{articolo.prezzo}}</p>
+              <p>Prezzo: {{articolo.prezzo}} €</p>
           </div>
           <button class="remove-btn" (click)="rimuoviCarrello(
             articolo.idArticolo)">Rimuovi</button>
@@ -21,5 +21,10 @@
 </div>
 
 <ng-template #emptyCart>
-  <p>Carrello vuoto, <a [routerLink]="['/']">torna nella home</a></p>
+  <div *ngIf="usernameLoggato">
+    <p>Carrello vuoto, <a [routerLink]="['/']">torna nella home</a></p>
+  </div>
+  <div *ngIf="!usernameLoggato">
+    <p>Carrello vuoto oppure effettua il login, <a [routerLink]="['/']">torna nella home</a></p>
+  </div>
 </ng-template>

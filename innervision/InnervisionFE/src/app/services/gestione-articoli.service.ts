@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Articolo } from '../interfaces/articolo';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { environment } from '../environment';
+import { GestioneUtenteService } from './gestione-utente.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ import { environment } from '../environment';
 
 export class GestioneArticoliService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private gestioneUtenteService: GestioneUtenteService
+  ) { }
 
   readonly apiUrl = environment.apiUrl + '/articoli';
 
@@ -76,14 +79,19 @@ export class GestioneArticoliService {
   }
 
   getReccomendArticoli(idUtente: number) {
+    const token = this.gestioneUtenteService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
     console.log(this.apiUrl + '/getReccomendArticoli');
     return this.http.post<{Messaggio: string, Operazione: string, Dto: Articolo[]}>(
-      this.apiUrl + '/getReccomendArticoli', idUtente).pipe(map(response => {
-        console.log('Messaggio:', response.Messaggio);
-        console.log('Operazione:', response.Operazione);
-        console.log('Risultato:', response.Dto);
-        return response.Dto;
-      })
-    );
+      this.apiUrl + '/getReccomendArticoli', idUtente ,{ headers: headers }
+    ).pipe(map(response => {
+      console.log('Messaggio:', response.Messaggio);
+      console.log('Operazione:', response.Operazione);
+      console.log('Risultato:', response.Dto);
+      return response.Dto;
+    }));
   }
 }

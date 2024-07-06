@@ -59,8 +59,9 @@ export class GestioneUtenteService {
   }
 
   getInfoUtente() {
+    console.log(this.getUsername());
     return this.http.post<{Messaggio: string, Operazione: string, Dto: Utente}>(
-      this.apiUrl + '/getInfoUtente', this.getUsername).pipe(map
+      this.apiUrl + '/getInfoUtente', this.getUsername()).pipe(map
       (response => {
         console.log('Messaggio:', response.Messaggio);
         console.log('Operazione:', response.Operazione);

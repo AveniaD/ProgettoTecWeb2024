@@ -24,7 +24,9 @@ import { ArticoloComponent } from '../articolo/articolo.component';
 export class CategoriesComponent {
 
   gestioneArticoliService: GestioneArticoliService = new GestioneArticoliService(
-  inject(HttpClient));
+    inject(HttpClient),
+    inject(GestioneUtenteService)
+  );
 
   gestioneCarrelloService: GestioneCarrelloService = new GestioneCarrelloService(
     inject(HttpClient),
@@ -52,11 +54,4 @@ export class CategoriesComponent {
     );
   }
 
-  aggiungiCarrello(idArticolo: number, usernameLoggato: string, idCarrello: number) {
-    this.gestioneCarrelloService.addArticolo(
-      idArticolo,
-      usernameLoggato,
-      idCarrello
-    )
-  }
 }

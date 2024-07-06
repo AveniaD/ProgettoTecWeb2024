@@ -55,7 +55,7 @@ public class VisualizzaArticoliController {
     @PostMapping(value = "/getReccomendArticoli", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Ottieni tutti gli articoli",
             notes = "Restituisce una lista di categorie disponibili.")
-    public ResponseEntity<Map<String, Object>> getReccomendArticoli(@RequestParam Long idUtente){
+    public ResponseEntity<Map<String, Object>> getReccomendArticoli(@RequestBody Long idUtente){
         try{
             LOGGER.info("Chiamata REST /getReccomendArticoli");
 

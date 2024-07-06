@@ -85,6 +85,7 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     public UtenteDto getUtenteByUsername(String username) {
-        return utenteMapper.entityToDto(utenteRepository.getUtenteByUsername(username));
+        Utente utenteTrovato = utenteRepository.getUtenteByUsername(username);
+        return utenteMapper.entityToDto(utenteTrovato);
     }
 }

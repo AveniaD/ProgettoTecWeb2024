@@ -34,37 +34,35 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.gestioneUtenteService.getUsername()){
+    if (this.gestioneUtenteService.getUsername()) {
       this.gestioneUtenteService.getInfoUtente().subscribe(
         (data: Utente) => {
           this.utente = data;
+
+          if (this.utente.acquistiEffettuati && this.utente.acquistiEffettuati.length > 0 && this.utente.idUtente) {
+            this.gestioneArticoliService.getReccomendArticoli(this.utente.idUtente).subscribe(
+              (data: Articolo[]) => {
+                this.articoloList = data;
+              },
+              error => {
+                console.error('Errore durante il recupero degli articoli', error);
+              }
+            );
+          } else {
+            this.gestioneArticoliService.getAllArticoli().subscribe(
+              (data: Articolo[]) => {
+                this.articoloList = data;
+              },
+              error => {
+                console.error('Errore durante il recupero degli articoli', error);
+              }
+            );
+          }
         },
         error => {
-          console.error('Errore durante il recupero degli articoli', error);
+          console.error('Errore durante il recupero delle informazioni utente', error);
         }
-      )
-      if(this.utente.acquistiEffettuati
-        && this.utente.acquistiEffettuati.length > 0
-        && this.utente.idUtente
-      ){
-        this.gestioneArticoliService.getReccomendArticoli(this.utente.idUtente).subscribe(
-          (data: Articolo[]) => {
-            this.articoloList = data;
-          },
-          error => {
-            console.error('Errore durante il recupero degli articoli', error);
-          }
-        );
-      }else{
-        this.gestioneArticoliService.getAllArticoli().subscribe(
-          (data: Articolo[]) => {
-            this.articoloList = data;
-          },
-          error => {
-            console.error('Errore durante il recupero degli articoli', error);
-          }
-        );
-      }
+      );
     }else{
       this.gestioneArticoliService.getAllArticoli().subscribe(
         (data: Articolo[]) => {

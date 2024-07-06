@@ -24,7 +24,9 @@ import { Carrello } from '../interfaces/carrello';
 export class DetailsComponent {
 
   gestioneArticoliService: GestioneArticoliService = new GestioneArticoliService(
-    inject(HttpClient));
+    inject(HttpClient),
+    inject(GestioneUtenteService)
+  );
 
   gestioneCarrelloService: GestioneCarrelloService = new GestioneCarrelloService(
     inject(HttpClient),

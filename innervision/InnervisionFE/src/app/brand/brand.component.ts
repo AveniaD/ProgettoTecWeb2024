@@ -23,7 +23,9 @@ import { GestioneUtenteService } from '../services/gestione-utente.service';
 })
 export class BrandComponent {
     gestioneArticoliService: GestioneArticoliService = new GestioneArticoliService(
-    inject(HttpClient));
+    inject(HttpClient),
+    inject(GestioneUtenteService)
+  );
 
     gestioneCarrelloService: GestioneCarrelloService = new GestioneCarrelloService(
       inject(HttpClient),

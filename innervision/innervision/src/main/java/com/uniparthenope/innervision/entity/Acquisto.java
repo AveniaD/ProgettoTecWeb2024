@@ -1,5 +1,6 @@
 package com.uniparthenope.innervision.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.uniparthenope.innervision.entity.diz.DizMarchio;
 import jakarta.persistence.*;
 
@@ -8,10 +9,11 @@ import jakarta.persistence.*;
 public class Acquisto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long idAcquisto;
     @ManyToOne
     @JoinColumn(name = "ID_UTENTE")
+    @JsonBackReference
     private Utente utente;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_ARTICOLO")
