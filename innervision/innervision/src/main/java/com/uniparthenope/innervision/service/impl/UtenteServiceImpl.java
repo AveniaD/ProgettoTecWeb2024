@@ -2,9 +2,11 @@ package com.uniparthenope.innervision.service.impl;
 
 import com.uniparthenope.innervision.common.InfoUtente;
 import com.uniparthenope.innervision.common.RequestLogin;
+import com.uniparthenope.innervision.dto.UtenteDto;
 import com.uniparthenope.innervision.entity.Carrello;
 import com.uniparthenope.innervision.entity.Utente;
 import com.uniparthenope.innervision.entity.diz.DizStatoCarrello;
+import com.uniparthenope.innervision.mapper.UtenteMapper;
 import com.uniparthenope.innervision.repository.CarrelloRepository;
 import com.uniparthenope.innervision.repository.UtenteRepository;
 import com.uniparthenope.innervision.service.UtenteService;
@@ -34,6 +36,9 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private UtenteMapper utenteMapper;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -76,5 +81,10 @@ public class UtenteServiceImpl implements UtenteService {
     @Override
     public UserDetails getInfoUtente(String username) {
         return userDetailsService.loadUserByUsername(username);
+    }
+
+    @Override
+    public UtenteDto getUtenteByUsername(String username) {
+        return utenteMapper.entityToDto(utenteRepository.getUtenteByUsername(username));
     }
 }

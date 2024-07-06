@@ -84,4 +84,25 @@ export class GestioneCarrelloService {
         })
     );
   }
+
+  acquistaArticoli(username: string, idCarrello: number): Observable<Carrello> {
+    console.log(this.apiUrl + '/acquistaArticoli');
+    const token = this.gestioneUtenteService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    this.requestGestioneCarrello.idCarrello = idCarrello;
+    this.requestGestioneCarrello.username = username;
+
+    return this.http.post<{Messaggio: string, Operazione: string, Dto: Carrello}>(
+      this.apiUrl + '/acquistaArticoli', this.requestGestioneCarrello, {headers}).pipe(
+        map(response => {
+          console.log('Messaggio:', response.Messaggio);
+          console.log('Operazione:', response.Operazione);
+          console.log('Risultato:', response.Dto);
+          return response.Dto;
+        })
+    );
+  }
 }

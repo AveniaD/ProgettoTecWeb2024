@@ -107,10 +107,8 @@ public class CarrelloServiceImpl implements CarrelloService {
         if(carrelloDaAggiornare == null){
             throw new RuntimeException("Carrello non trovato");
         }
-        carrelloDaAggiornare.setStatoCarrello(dizStatoCarrelloRepository.getById(6L));
 
-        carrelloDaAggiornare.setStatoCarrello(
-                dizStatoCarrelloRepository.getById(requestGestioneCarrelloInInput.getIdStatoCarrello()));
+        carrelloDaAggiornare.getArticoli().clear();
         carrelloRepository.save(carrelloDaAggiornare);
 
         ArrayList<Acquisto> acquistiEffettuati = new ArrayList<>();

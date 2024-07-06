@@ -99,4 +99,37 @@ public class GestioneUtenteController {
             return ResponseEntity.ok().body(result);
         }
     }
+
+    @PostMapping(value = "/getInfoUtente", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Effettua la registrazione di un utente",
+            notes = "Restituisce l'utente registrato.",
+            response = UtenteDto.class)
+    public ResponseEntity<Map<String, Object>> getInfoUtente(@RequestBody String usernameLoggato) {
+        try {
+            LOGGER.info("Chiamata REST /login");
+
+            UtenteDto utenteDto = utenteService.getUtenteByUsername(usernameLoggato);
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(DTO, utenteDto);
+            result.put(MESSAGGIO, "Login avvenuta con successo");
+            result.put(OPERAZIONE, "Login Utente");
+
+            LOGGER.info("Fine chiamata Rest /Login");
+
+            return ResponseEntity.ok().body(result);
+
+        } catch (Exception e) {
+
+            Map<String, Object> result = new HashMap<>();
+            result.put(TOKEN, -1);
+            result.put(MESSAGGIO, "Login fallito");
+            result.put(OPERAZIONE, "Login Utente");
+
+            LOGGER.info("Errore nella chiamata Rest /Login");
+            LOGGER.error(MESSAGGIO_ERRORE, e);
+
+            return ResponseEntity.ok().body(result);
+        }
+    }
 }

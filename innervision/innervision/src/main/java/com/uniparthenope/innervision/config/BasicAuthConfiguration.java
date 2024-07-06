@@ -36,7 +36,7 @@ public class BasicAuthConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz) -> authz
-                    .requestMatchers("/user/register","/user/login").permitAll()
+                    .requestMatchers("/user/*").permitAll()
                     .requestMatchers("/articoli/getAllArticoli",
                             "/articoli/getArticoloById",
                             "/articoli/getArticoliByNome",

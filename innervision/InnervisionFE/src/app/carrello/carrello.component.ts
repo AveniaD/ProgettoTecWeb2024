@@ -4,7 +4,7 @@ import { GestioneCarrelloService } from '../services/gestione-carrello.service';
 import { Carrello } from '../interfaces/carrello';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ArticoloComponent } from '../articolo/articolo.component';
 import { GestioneUtenteService } from '../services/gestione-utente.service';
 
@@ -25,7 +25,8 @@ export class CarrelloComponent implements OnInit{
   carrello!: Carrello;
 
   constructor(private gestioneCarrelloService: GestioneCarrelloService,
-    private gestioneUtenteService: GestioneUtenteService){}
+    private gestioneUtenteService: GestioneUtenteService,
+    private router: Router){}
 
   usernameLoggato = this.gestioneUtenteService.getUsername();
   idCarrello = this.gestioneUtenteService.getIdCarrello();
@@ -71,5 +72,18 @@ export class CarrelloComponent implements OnInit{
           console.error('Errore durante l\'aggiornamento del carrello:', error);
         }
       );
+    }
+
+  acquistaArticoli() {
+    this.gestioneCarrelloService.acquistaArticoli(this.usernameLoggato, this.idCarrello)
+    .subscribe(
+      (carrello: Carrello) => {
+        console.log('Articolo rimosso dal carrello:', carrello);
+        this.router.navigate(['/home']);
+      },
+      error => {
+        console.error('Errore durante l\'aggiunta dell\'articolo al carrello:', error);
+      }
+    );
   }
 }
